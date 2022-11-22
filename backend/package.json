@@ -4,7 +4,7 @@
   "description": "this is my backen",
   "main": "server.js",
   "scripts": {
-    "test": "start"
+    "test": "nodemon"
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,7 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "nodemailer": "^6.8.0",
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20",
+    "socket.io": "^4.5.3"
   }
 }
