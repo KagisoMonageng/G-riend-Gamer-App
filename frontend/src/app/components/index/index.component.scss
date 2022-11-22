@@ -1,0 +1,70 @@
+.text
+{
+    font-size: 15px;
+    width: 180px;
+}
+.logo
+{
+    margin-bottom: -1.5rem;
+}
+.glow
+{
+    box-shadow: 0px 0px 8px #64DD5A;
+    
+    &:hover
+    {
+        animation-name: bounce-top;
+		animation-duration: 3.5s;
+		animation-timing-function: ease;
+		animation-delay: 0s;
+		animation-iteration-count: 1;
+		animation-direction: normal;
+		animation-fill-mode: forwards;
+
+    }@keyframes bounce-top {
+			
+		0% {
+			transform:translateY(0);
+		}
+		25% {
+			transform:translateY(0);
+		}
+		40% {
+			transform:translateY(-24px);
+		}
+		55% {
+			transform:translateY(0);
+		}
+		65% {
+			transform:translateY(-12px);
+		}
+		75% {
+			transform:translateY(0);
+		}
+		82% {
+			transform:translateY(-6px);
+		}
+		87% {
+			transform:translateY(0);
+		}
+		93% {
+			transform:translateY(-4px);
+		}
+		100% {
+			transform:translateY(0);
+		}
+    }
+   
+}
+
+.controller
+{
+    margin-bottom: -1.5rem;
+    filter: drop-shadow(0px 8px 7px rgba(0, 0, 0, 0.207));
+}
+
+.console-logo
+{
+    filter: brightness(200%);
+    filter: ex(100%)
+}
