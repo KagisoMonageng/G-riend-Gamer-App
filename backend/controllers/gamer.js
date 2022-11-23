@@ -6,7 +6,7 @@ const db = new Pool({
     host: 'localhost',  //Database host
     database: 'griend_db', //Database database
     password: 'admin12345', //Database password
-    port: 5433//Database port
+    port: 5432//Database port
   })
 
 const image = '';
@@ -22,8 +22,6 @@ exports.register = async (req, res)=>{
             let number = Math.floor(Math.random()*(2000 - 100) + 100);
             let gametag = name.toLowerCase()+'#'+number;
 
-            console.log(gametag)
-            
                 db.query(
                     'INSERT INTO gamers (name,surname,email,password,gender,image,birthday,gametag) VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *',[name,surname,email,password,gender,image,birthday,gametag],
                     (db_err,results) => {
@@ -38,8 +36,7 @@ exports.register = async (req, res)=>{
                                 gametag: results.rows[0].gametag,
                                 name: results.rows[0].name,
                                 surname: results.rows[0].surname,
-                                image: results.rows[0].image
-                                
+                                image: results.rows[0].image 
                             },
                             process.env.SECRET_KEY,{
                                 algorithm: 'HS256',

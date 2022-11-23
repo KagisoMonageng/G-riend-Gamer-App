@@ -1,7 +1,32 @@
-<div class="container">
+<div class="container mx-auto px-2 md:px-3 lg:px-3">
+       
+        <div class="hero min-h-screen md:w-8/12">
+            <div class="hero-content text-center">
+              <div class="max-w-lg mr-auto ml-auto">
+
+                <img class="w-36 h-auto md:w-96 mr-auto ml-auto py-0 logo" src="https://res.cloudinary.com/griend/image/upload/v1669135920/G-riend_nkwzoa.png" alt="">
+                <p class="py-0 mb-2 text-white text mr-auto ml-auto">gaming is <span class="font-bold">Life</span></p>
+
+                <p class="py-3 mt-2 mb-2 text-white text mr-auto ml-auto font-semibold">Sign in and find your play mates</p>
+
+                <form class="form-control " [formGroup] ="loginForm" (ngSubmit)="login(loginForm)">
+                <input type="text" formControlName="cred" placeholder="Gametag" class="input w-64 mt-5 mb-2 max-w-lg input-box" required>
+                <input type="password" formControlName="password" placeholder="Password" class="input w-64 mt-5 mb-2 max-w-lg input-box" required>
+
+                <div class="flex justify-between">
+                    <div></div>
+                    <div>
+                        <p class="py-1 mb-5 text-white font-light"><a>Forgot password?</a></p>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary w-60 mb-2 text-white glow" [disabled]="loginForm.invalid">Sign In</button>
+                </form>
+                
+                <p class="py-2  mb-2 text-white text mr-auto ml-auto">Don't have an account?<span class="font-bold"><a routerLink="/register">Sign Up</a> </span></p>
+
+            </div>
+        </div>
+      </div>
 
 
-
-
-    
 </div>

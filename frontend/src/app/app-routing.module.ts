@@ -1,11 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './components/home/home.component';
 import { IndexComponent } from './components/index/index.component';
 import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { GamerGuard } from './guards/gamer.guard';
 
 const routes: Routes = [
   {path: '', component:IndexComponent},
-  {path:'login', component:LoginComponent}
+  {path:'login', component:LoginComponent},
+  {path:'register', component:RegisterComponent},
+  {path:'home', component:HomeComponent,canActivate: [GamerGuard]},
+
 ];
 
 @NgModule({
