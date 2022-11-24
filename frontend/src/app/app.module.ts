@@ -12,7 +12,8 @@ import { HomeComponent } from './components/home/home.component';
 import { CommonModule } from '@angular/common';
 import { GamerGuard } from './guards/gamer.guard';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
-
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,10 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxSpinnerModule,
+    BrowserAnimationsModule,
+    
   ],
   providers: [GamerGuard],
   bootstrap: [AppComponent]

@@ -1,26 +1,43 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { io } from 'socket.io-client';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { io, Socket } from 'socket.io-client';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
 
-  public message$: BehaviorSubject<string> = new BehaviorSubject('');
+  url = 'http://localhost:8080';
+  private socket !: Socket;
 
-  socket = io('http://localhost:8080');
-  constructor() { }
+  constructor() {
+    //this.socket = io(this.url)
+   }
 
-  public sendMessage(message: any) {
-    this.socket.emit('message', message);
+  public sendMessage(data: any) {
+    this.socket.emit('message', data);
   }
 
-  public getNewMessage = () => {
-    this.socket.on('message', (message) =>{
-      this.message$.next(message);
-    });
-
-    return this.message$.asObservable();
+  joinRoom(data:any):void
+  {
+    this.socket.emit('join',data)
   }
+
+  getNewMessage(): Observable <any>
+  {
+    return new Observable<{gamer:string,message: string}>(observer=>{
+      this.socket.on('new message',(data:any)=>{
+        observer.next(data)
+      });
+      return ()=>{
+        this.socket.disconnect();
+      }
+
+
+    })
+
+  }
+  
+
+
 }

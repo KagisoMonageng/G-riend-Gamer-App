@@ -6,7 +6,7 @@ const db = new Pool({
     host: 'localhost',  //Database host
     database: 'griend_db', //Database database
     password: 'admin12345', //Database password
-    port: 5432//Database port
+    port: 5433//Database port
   })
 
 const image = '';
@@ -123,4 +123,17 @@ exports.getOneGamer = (req, res) => {
             }
         }
     })
+}
+
+exports.sendMessage = (req, res) => {
+    io.on('connection',(socket)=>{ 
+        sender = req.params.gametag
+        receiver = req.body.receivcer_gametag;
+          socket.on('message',(message)=>{
+              socket.to(receiver).emit('message',message);
+          });
+          socket.on('disconnect', () => {
+              
+            });
+      })
 }
