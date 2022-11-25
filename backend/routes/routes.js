@@ -7,7 +7,7 @@ router.post('/register',gamer.register);
 
 router.post('/login',gamer.login);
 
-router.get('/search',gamer.searchGamers);
+router.get('/searchGamers/:gametag',gamer.searchGamers);
 
 router.get('/search/:gametag',gamer.getOneGamer);
 
