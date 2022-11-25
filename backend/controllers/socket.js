@@ -1,23 +1,23 @@
 
-// class Socket{
-//     constructor(socket){
-// 		this.io = socket;
-// 	}
+class Socket{
 
-//     events()
-//     {
-//         this.io.on('chats', async (data)=>{
-//             if (data.userId == '') {
-//                 this.io.emit(`chat-list-response`, {
-//                     error : true,
-//                     message : "Gamer does not exits."
-//                 });
-//             }
-//         })
-//     }
+    constructor(socket){
+		this.io = socket;
+	}
+
+    events()
+    {
+        this.io.on('connection', async (socket)=>{
+            
+        })
+    }
+
+    getARoom(user1, user2){
+        return 'privateRooom' + user1.name + 'And' + user2.name;
+    }
 
 
 
-// }
+}
 
-// module.exports = Socket;
+module.exports = Socket;

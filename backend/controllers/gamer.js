@@ -6,10 +6,11 @@ const db = new Pool({
     host: 'localhost',  //Database host
     database: 'griend_db', //Database database
     password: 'admin12345', //Database password
-    port: 5433//Database port
+    port: 5432//Database port
   })
 
 const image = '';
+users = [];
 
 exports.register = async (req, res)=>{ 
 
@@ -95,12 +96,11 @@ exports.login =  (req, res)=>{
 }
 
 exports.searchGamers = (req, res) => {
-
     const gametag = req.params.gametag;
     const sql = "SELECT * FROM gamers";
     db.query(sql,(err, results)=>{
         if(err) { res.status(400).json({message:'Query failed'}) }else{
-            res.status(200).json(results.rows[0]);
+            res.status(200).json(results.rows);
         }
     })
 }
@@ -125,15 +125,21 @@ exports.getOneGamer = (req, res) => {
     })
 }
 
-exports.sendMessage = (req, res) => {
-    io.on('connection',(socket)=>{ 
-        sender = req.params.gametag
-        receiver = req.body.receivcer_gametag;
-          socket.on('message',(message)=>{
-              socket.to(receiver).emit('message',message);
-          });
-          socket.on('disconnect', () => {
-              
-            });
-      })
-}
+
+// exports.getGamers()
+// {
+//     const sql = "SELECT * FROM gamers";
+//     db.query(sql,(err, results)=>{
+//         if(err) { return null }else{
+//            users = results.rows;
+//         }
+//     })
+
+// }
+
+
+
+
+
+
+ 

@@ -15,17 +15,10 @@ export class AppComponent {
 
   }
 
-  ngOnInit(){
-    this.chatService.getNewMessage().subscribe((message: string) => {
-      this.messageList.push(message);
-    })
-  }
+  ngOnInit(){}
+  
 
 
-  sendMessage() {
-    this.chatService.sendMessage(this.newMessage);
-    console.log(this.newMessage);
-    this.newMessage = '';
-  }
+ 
   title = 'frontend';
 }

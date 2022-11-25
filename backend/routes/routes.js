@@ -11,6 +11,6 @@ router.get('/search',gamer.searchGamers);
 
 router.get('/search/:gametag',gamer.getOneGamer);
 
-router.post('/sendMessage/:gametag',gamer.sendMessage)
+//router.post('/sendMessage/:gametag',gamer.sendMessage)
 
 module.exports = router;
