@@ -14,8 +14,8 @@ export class ChatService {
     //this.socket = io(this.url)
    }
 
-  public sendMessage(data: any) {
-    this.socket.emit('message', data);
+  public sendMessage(message: any) {
+    this.socket.emit('new-message', message);
   }
 
   joinRoom(data:any):void

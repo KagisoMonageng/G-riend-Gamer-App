@@ -23,6 +23,10 @@ export class AuthService {
     return this.http.post(this.url+'/login',data);
   } 
 
+  forgotPassword(data: any) {
+    return this.http.post(this.url+'/forgotPassword',data);
+  }
+
   saveToken(token : string): void
   {
     
@@ -34,6 +38,14 @@ export class AuthService {
       
     }
     
+  }
+
+  logout()
+  {
+      this.isAuthenticated = false;
+      this.token = ''
+      localStorage.clear();
+
   }
 
 }

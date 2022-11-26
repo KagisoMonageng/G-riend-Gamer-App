@@ -13,6 +13,10 @@ export class JwtService {
   
   getData(token: string)
   { 
-    return this.helper.decodeToken(token);
+    if(!this.helper.isTokenExpired(token)){
+      return this.helper.decodeToken(token);
+    }
+    
   }
+  
 }

@@ -11,14 +11,26 @@ export class GamerService {
 
   constructor(private http:HttpClient) { }
 
-  getGamers()
+  updateProfile(gametag:any ,form:any)
   {
-    return this.http.get(this.url+'/search');
+    return this.http.patch(this.url+'/update/'+gametag,form);
+
   }
 
-  getOneGamer(gametag:any)
+  updateProfilePicture(gametag:any,link:any)
   {
-    this.http.get(this.url+'/search/'+gametag);
+    return this.http.patch(this.url+'/updateProfilePicture/'+gametag, link);
+
+  }
+
+  getGamers(gametag:string): Observable<any>
+  {
+    return this.http.get(this.url+'/searchGamers/'+gametag);
+  }
+
+  getOneGamer(gametag:any): Observable<any>
+  {
+    return this.http.get(this.url+'/search/'+gametag);
   }
 
 }

@@ -1,0 +1,47 @@
+<div class="container mx-auto px-3 justify-center md:px-3 lg:px-3 ">
+    <div class="min-h-screen">
+        <div class="chat-header flex flex-row justify-between">
+    
+            <ul class="flex-col mt-4 w-96 justify-center ml-auto mr-auto">
+                <li class="bg-white bg-opacity-40 mb-5 h-14 rounded-xl p-2 flex gap-4">
+                    <a class="mt-auto mb-auto font-medium back-icon"><i class="fi fi-rr-angle-left"></i></a>
+                    <!-- chat 1 -->
+                   <a class="link-chat flex flex-row justify-between" >
+                    <div class="flex gap-3 profile-image" (click)="openProfile()">
+                        <div class="image rounded-full w-11 h-11 "><img  class="rounded-full" src="https://images.unsplash.com/photo-1669307260367-8d5e7d61b9b9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80" alt=""></div>
+                        
+                        <div class="flex flex-col">
+                            <p class="text font-semibold">{{gamer.gametag}}</p>
+                            <p class="text font-light">{{gamer.name}}</p>
+                        </div>
+                    </div>
+    
+                     <div class="icon-div pr-4">
+                         
+                     </div>
+                   </a>
+                </li>
+            </ul>
+
+        </div>
+        <div class="messages-container">
+
+            <div *ngFor="let message of messageList">
+
+            </div>
+
+
+        </div>
+
+        <div class="message-input fixed bottom-4 flex flex-row gap-2 w-full">
+            <input type="text" [(ngModel)]="newMessage" (keyup)="$event.keyCode == 13 && sendMessage()" formControlName="newMessage" placeholder="type message here" class="input max-w-lg input-box w-full" required>
+            <div class="icon-div">
+                <a (click)="sendMessage()"><svg xmlns="http://www.w3.org/2000/svg"  class="w-7 h-7 icon mt-1" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8l-8 6l-8.054-2.685z"/></svg></a>
+            </div>
+        </div>
+        
+       
+
+    </div>
+    <ngx-spinner bdColor = "rgba(43, 80, 46, 0.8)" size = "default" color = "#fff" type = "square-jelly-box" [fullScreen] = "false"><p style="color: white" > Hang on ... </p></ngx-spinner>
+</div>
