@@ -10,12 +10,12 @@
             <p class="py-3 mt-2 mb-2 text-white text mr-auto ml-auto font-semibold">Sign Up and find your play mates</p>
 
             <form class="form-control" [formGroup] ="registerForm" (ngSubmit)="register(registerForm)">
-            <input type="text" formControlName="name" placeholder="First name" class="input w-64 input-sm max-w-xs input-box " required>
-            <input type="text" formControlName="surname" placeholder="Last name" class="input w-64 input-sm max-w-xs input-box" required>
+            <input type="text" formControlName="name" placeholder="First name" class="input w-64 input-sm max-w-xs input-box " minlength="2" required>
+            <input type="text" formControlName="surname" placeholder="Last name" class="input w-64 input-sm max-w-xs input-box" minlength="2" required>
             <input type="email" formControlName="email" placeholder="Email" class="input w-64  input-sm max-w-xs input-box" required>
 
-            <input type="password" formControlName="password" placeholder="Password" class="input w-64  input-sm max-w-xs input-box" required>
-            <input type="password" formControlName="confirmPassword" placeholder="Re-type Password" class="input w-64  input-sm max-w-xs input-box" required>
+            <input type="password" formControlName="password" placeholder="Password" class="input w-64  input-sm max-w-xs input-box" minlength="5" required>
+            <input type="password" formControlName="confirmPassword" placeholder="Re-type Password" class="input w-64  input-sm max-w-xs input-box" minlength="5" required>
 
             <div class="flex gap-2 w-64 mb-3">
                 <select class="select select-sm max-w-xs input-box flex-1" formControlName="gender" id="">
@@ -47,7 +47,7 @@
         </div>
     </div>
   </div>
-  <ngx-spinner bdColor = "rgba(43, 80, 46, 0.8)" size = "default" color = "#fff" type = "square-jelly-box" [fullScreen] = "false"><p style="color: white" > Hang on ... </p></ngx-spinner>
+  <ngx-spinner bdColor="rgba(43, 80, 46, 0.8)" size = "default" color = "#fff" type = "square-jelly-box" [fullScreen] = "false"><p style="color: white" > Hang on ... </p></ngx-spinner>
 
 
 

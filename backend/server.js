@@ -15,15 +15,10 @@ const port = 8080
 
 var corsOptions = {
     origin: "*"
-  };
+};
+
 app.use(express.json());
 app.use(cors(corsOptions));
-
-
-
-
-
-
 
 app.use('/', routes)
 server.listen(port,() => {console.log('Server running on port 8080');});

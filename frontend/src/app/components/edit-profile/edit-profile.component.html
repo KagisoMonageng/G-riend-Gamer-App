@@ -2,18 +2,96 @@
     <div class="min-h-screen">
         <app-nav-bar></app-nav-bar>
 
-        <div class="flex flex-col justify-center ml-auto mr-auto w-52 gap-3">
-            <h2 class="text-gametag text-center font-semibold w-52">ChampangePapi#12</h2>
+        <!-- profile part -->
+            <div class="flex flex-col justify-center ml-auto mr-auto w-52 gap-3">
+            <h2 class="text-gametag text-center font-semibold w-52">{{gametag}}</h2>
 
-            <div class="image rounded-full w-48 h-48 border-4 ml-auto mr-auto border-white"><img  class="rounded-full" src="{{image_link}}" alt=""></div>
-            
+            <div class="profile-pic">
+                <img class="rounded-full w-48 h-48 border-4 ml-auto mr-auto border-white object-cover" src="{{image_link}}" alt="">
+                <div class="link-edit mt-3 mr-auto ml-auto">
+                    <label class="edit-picture link-secondary text-white" for="my-modal-6" (click)="editDetailsToggle(false)" >edit profile picture</label>
+                </div>
+            </div>
+
+            <div class="name w-52 mr-auto ml-auto py-0">
+                <h3 class="text text-center font-medium ">{{name}} {{surname}}</h3>
+                <p class="text text-center font-normal">{{email}}</p>
+            </div>
+
+            <div class="edit-btn mr-auto ml-auto ">
+                <label for="my-modal-6"  (click)="editDetailsToggle(true)">
+                    <div class="btn font-semibold text-white">Edit Profile<i class="fi fi-rr-pencil ml-3"></i></div>
+
+                </label>
+            </div>
 
         </div>
 
+
+        <input type="checkbox" id="my-modal-6" class="modal-toggle" />
+        <div class="modal modal-bottom sm:modal-middle">
+            <div class="modal-box bg-opacity-100 shadow text-left">
+
+                <div id="edit-picure" [hidden]="editDetails" >
+                    <h3 class="font-bold text-lg">Profile Picture</h3>
+                    
+    
+                        <p class="py-2">Select a new picture</p>
+                        <form action="" [formGroup]="update_dp" (ngSubmit)="onSubmit()" >
+                            <input type="file" formControlName = 'file' class="file-input file-input-bordered file-input-md w-full max-w-xs input-custom" (change)="onFileChange($event)" required>
+    
+                            <div class="modal-action">
+                            <label for="my-modal-6" class="btn cancel text-white">Cancel</label>
+                            <button type="submit" class="btn btn-primary text-white glow-1" >Send</button>
+                            </div>
+                        </form>
+                </div>
+
+                <div id="edit-profile" *ngIf="editDetails">
+                    <h3 class="font-bold text-lg">Profile Details</h3>
+
+
+                    <p class="py-2">Fill in your new details</p>
+                    <form action="" [formGroup]="updateForm" (ngSubmit)="onUpdate(updateForm)">
+                        <input type="text" formControlName="name" placeholder="{{name}}" class= "input w-full input-md max-w-xs input-box" minlength="2" required>
+                        <input type="text" formControlName="surname" placeholder="{{surname}}" class="input w-full input-md max-w-xs input-box" minlength="2" required>
+                        <input type="password" formControlName="confirmPassword" placeholder=" New Password" class="input w-full  input-md max-w-xs input-box" minlength="5" required>
+                        <input type="password" formControlName="password" placeholder="Re-type Password" class="input w-full  input-md max-w-xs input-box" minlength="5" required>
+
+                        <div class="modal-action">
+                        <label for="my-modal-6" class="btn cancel text-white">Cancel</label>
+                        <button type="submit" class="btn btn-primary text-white glow-1" [disabled]="updateForm.invalid">Save</button>
+                        </div>
+                    </form>
+
+
+                </div>
+                    
+
+                
+
+
+            </div>
+        </div>
+
+        <!-- games grid -->
+
+        <div class="games mt-4 w-80 h-52 bg-white mr-auto ml-auto">
+            <p class="text text-center font-normal mb-4">My Games</p>
+
+            <div class="games-grid w-full">
+
+            </div>
+        </div>
+
+
+        
+        
         
 
         
 
+        <ngx-spinner bdColor = "rgba(43, 80, 46, 0.8)" size = "default" color = "#fff" type = "square-jelly-box" [fullScreen] = "false"><p style="color: white" > Hang on ... </p></ngx-spinner>
 
     </div>
 </div>

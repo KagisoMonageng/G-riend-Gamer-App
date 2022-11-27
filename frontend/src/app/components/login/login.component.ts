@@ -34,7 +34,6 @@ export class LoginComponent implements OnInit {
     }
 
     setTimeout(() => {
-      
       this.spinner.hide();
     }, 2000);
   }

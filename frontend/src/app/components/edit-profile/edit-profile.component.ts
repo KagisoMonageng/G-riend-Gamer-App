@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthService } from 'src/app/services/auth/auth.service';
@@ -28,7 +28,15 @@ export class EditProfileComponent implements OnInit {
     upload_preset: new FormControl()}
   );
 
-  cloudinaryUrl: string = 'https://api.cloudinary.com/v1_1/dev-lab/image/upload';
+  updateForm = new FormGroup({
+    name:new FormControl('',[Validators.required,Validators.pattern('^[a-zA-Z ]*$')]),
+    surname: new FormControl('',[Validators.required,Validators.pattern('^[a-zA-Z ]*$')]),
+    confirmPassword: new FormControl(),
+    password: new FormControl()
+}
+  );
+
+  cloudinaryUrl: string = 'https://api.cloudinary.com/v1_1/griend/image/upload';
   file: any;
   isUpdating: boolean = false;
 
@@ -36,10 +44,13 @@ export class EditProfileComponent implements OnInit {
     link : '' 
   }
 
+  editDetails: boolean = false;
+
   constructor(private gamerServ : GamerService,private toast : NgToastService,private jwt:JwtService,private spinner:NgxSpinnerService, private http:HttpClient,private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.spinner.show();
+    
     this.surname = this.jwt.getData(JSON.stringify(localStorage.getItem('key'))).surname;
     this.name = this.jwt.getData(JSON.stringify(localStorage.getItem('key'))).name;
     this.email = this.jwt.getData(JSON.stringify(localStorage.getItem('key'))).email;
@@ -55,13 +66,18 @@ export class EditProfileComponent implements OnInit {
   {
     this.spinner.show();
 
-    if(event.target.files.length>0)
+    if(event.target.files.length > 0)
     {
       this.file =  event.target.files[0];
       this.spinner.hide();
      
     }
 
+  }
+
+  editDetailsToggle(value:boolean)
+  {
+    this.editDetails = value;
   }
 
 
@@ -80,9 +96,13 @@ export class EditProfileComponent implements OnInit {
     if(form.valid){
       if(form.value.confirmPassword == form.value.password)
       {
+        console.log(form.value)
         this.gamerServ.updateProfile(this.gametag, form.value).subscribe((data:any)=>{
             this.authService.saveToken(data.token)
-            this.router.navigateByUrl('/profile');
+            this.ngOnInit();
+            form.reset();
+            
+            
           
         },(err:HttpErrorResponse)=>{
           this.toast.error({detail:'Sorry!',summary:err.error.message,position:'tr',duration:2000}) 

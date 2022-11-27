@@ -4,11 +4,11 @@
     
             <ul class="flex-col mt-4 w-96 justify-center ml-auto mr-auto">
                 <li class="bg-white bg-opacity-40 mb-5 h-14 rounded-xl p-2 flex gap-4">
-                    <a class="mt-auto mb-auto font-medium back-icon"><i class="fi fi-rr-angle-left"></i></a>
+                    <a class="mt-auto mb-auto font-medium back-icon" routerLink="/home"><i class="fi fi-rr-angle-left"></i></a>
                     <!-- chat 1 -->
-                   <a class="link-chat flex flex-row justify-between" >
-                    <div class="flex gap-3 profile-image" (click)="openProfile()">
-                        <div class="image rounded-full w-11 h-11 "><img  class="rounded-full" src="https://images.unsplash.com/photo-1669307260367-8d5e7d61b9b9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80" alt=""></div>
+                   <a class="link-chat flex flex-row justify-between" (click)="openProfile()">
+                    <div class="flex gap-3 profile-image">
+                        <img  class="rounded-full rounded-full w-11 h-11 object-cover" src="https://images.unsplash.com/photo-1669307260367-8d5e7d61b9b9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80" alt="">
                         
                         <div class="flex flex-col">
                             <p class="text font-semibold">{{gamer.gametag}}</p>

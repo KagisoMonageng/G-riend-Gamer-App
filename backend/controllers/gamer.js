@@ -44,7 +44,7 @@ exports.register = async (req, res)=>{
         if(results.rowCount == 0)
         {
             let number = Math.floor(Math.random()*(2000 - 100) + 100);
-            let gametag = name.toLowerCase()+'@'+number;
+            let gametag = name.toLowerCase()+number;
 
                 db.query(
                     'INSERT INTO gamers (name,surname,email,password,gender,image,birthday,gametag) VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *',[name,surname,email,password,gender,image,birthday,gametag],
@@ -136,7 +136,6 @@ exports.login =  (req, res)=>{
 exports.searchGamers = (req, res) => {
 
     const currentGamer =req.params.gametag;
-    console.log(currentGamer)
     
     const sql = "SELECT * FROM gamers WHERE gametag != $1";
     db.query(sql,[currentGamer],(err, results)=>{
@@ -206,7 +205,7 @@ exports.updateImage = async (req,res) => {
     const link = req.body.link;
     const gametag = req.params.gametag;
 
-    db.query('UPDATE gamers SET image = $1 WHERE gametag = $2',[link,gametag],(err,results)=>{
+    db.query('UPDATE gamers SET image = $1 WHERE gametag = $2 RETURNING *',[link,gametag],(err,results)=>{
         if(err){
             res.status(400).json({message:err.message});
         }else
@@ -236,7 +235,7 @@ exports.updateGamer = async (req, res)=>{
 
     const {password,name ,surname} = req.body;
     db.query(
-      'UPDATE gamers SET password = $1 ,name = $2 ,surname = $3 WHERE gametag = $4',
+      'UPDATE gamers SET password = $1 ,name = $2 ,surname = $3 WHERE gametag = $4 RETURNING *',
         [password ,name ,surname,gametag],
        (error,results) => {
         if (error) {

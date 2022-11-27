@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { GamerService } from 'src/app/services/gamer/gamer.service';
 import {NgToastService}from 'ng-angular-popup'
 import { ChatService } from 'src/app/services/chat.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-chat',
@@ -20,7 +21,7 @@ export class ChatComponent implements OnInit {
   newMessage: any;
   messageList:  string[] = [];
 
-  constructor(private gamerServ : GamerService,private toast : NgToastService,private chatService:ChatService) { }
+  constructor(private gamerServ : GamerService,private toast : NgToastService,private chatService:ChatService,private router : Router) { }
 
   ngOnInit(): void {
     this.gamerServ.getOneGamer(localStorage.getItem('selected')).subscribe( async(gamer:any)=>{
@@ -40,14 +41,14 @@ export class ChatComponent implements OnInit {
 
   openProfile()
   {
-
+    this.router.navigateByUrl('/view-profile');
+   
   }
 
   sendMessage()
   {
     console.log(this.newMessage);
-    this.chatService.sendMessage(this.newMessage);
-    
+    this.chatService.sendMessage(this.newMessage); 
     this.newMessage = '';
 
 

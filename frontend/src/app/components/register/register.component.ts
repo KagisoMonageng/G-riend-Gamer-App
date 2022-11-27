@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { JwtService } from 'src/app/services/jwt/jwt.service';
@@ -15,8 +15,8 @@ import {NgToastService}from 'ng-angular-popup'
 export class RegisterComponent implements OnInit {
 
   registerForm = new FormGroup({
-    name: new FormControl(),
-    surname: new FormControl(),
+    name: new FormControl('',[Validators.required,Validators.pattern('^[a-zA-Z ]*$')]),
+    surname: new FormControl('',[Validators.required,Validators.pattern('^[a-zA-Z ]*$')]),
     email: new FormControl(),
     gender: new FormControl(),
     birthday: new FormControl(),
@@ -44,7 +44,7 @@ export class RegisterComponent implements OnInit {
 
   register(form:FormGroup)
   {
-    console.log(form.value)
+    
     if(form.value.password == form.value.confirmPassword)
     {
       this.spinner.show();
@@ -54,13 +54,13 @@ export class RegisterComponent implements OnInit {
 
           setTimeout(() => {
             this.toast.success({detail:"Welcome!", summary:data.message,position:'tr',duration:2000})
-          
             this.spinner.hide();
             this.router.navigateByUrl('/home');
           }, 5000);
           
 
         },(error:HttpErrorResponse)=>{
+          this.spinner.hide();
           console.log(error.error.message);
           this.toast.error({detail:"Sorry!", summary:error.error.message,position:'tr',duration:2000})
         });

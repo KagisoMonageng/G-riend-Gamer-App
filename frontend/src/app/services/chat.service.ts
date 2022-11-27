@@ -32,8 +32,6 @@ export class ChatService {
       return ()=>{
         this.socket.disconnect();
       }
-
-
     })
 
   }
