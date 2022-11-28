@@ -1,15 +1,21 @@
-const Pool = require('pg').Pool;
+const Client = require('pg').Pool;
 const jwt = require("jsonwebtoken");
 var nodemailer = require('nodemailer');
 var smtpTransport = require('nodemailer-smtp-transport');
 
-const db = new Pool({
-    user: 'admin',  //Database username
-    host: 'localhost',  //Database host
-    database: 'griend_db', //Database database
-    password: 'admin12345', //Database password
-    port: 5432//Database port
+// const db = new Pool({
+//     user: 'admin',  //Database username
+//     host: 'localhost',  //Database host
+//     database: 'griend_db', //Database database
+//     password: 'admin12345', //Database password
+//     port: 5433//Database port
+//   })
+const db = new Client({
+   connectionString: 'postgres://szqwffyzfcbzen:59835fb400b6bee81e96691a83d6b5d954778e1d00a632b58185c10fe8054025@ec2-54-165-178-178.compute-1.amazonaws.com:5432/d42j382g86r983',
+   ssl:{rejectUnauthorized: false}
   })
+
+
 
 
   const sender =  "griendgamer@outlook.com";
@@ -66,10 +72,11 @@ exports.register = async (req, res)=>{
                                 algorithm: 'HS256',
                                 expiresIn: 120000000
                             });
+
+                            //res.status(200).json({message: "Account successully registered",token: token,});
                             emailDetails.from = sender;
                             emailDetails.to = results.rows[0].email;
                             emailDetails.text = "Welcome! "+results.rows[0].name+'\n\nThis is your generated gametag \n'+results.rows[0].gametag +'\nUse it to sign in to your account along with your password. \n\nGriend\nYour Gamer Friend.';
-                        
                             emailDetails.subject = "Welcome to Griend";
 
                             transporter.sendMail(emailDetails,(emailErr)=>{
@@ -80,8 +87,6 @@ exports.register = async (req, res)=>{
                                 }
                             });
 
-                                
-                            
                         }   
             })
         }else
