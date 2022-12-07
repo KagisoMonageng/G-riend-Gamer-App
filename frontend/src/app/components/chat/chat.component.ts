@@ -4,6 +4,7 @@ import { GamerService } from 'src/app/services/gamer/gamer.service';
 import {NgToastService}from 'ng-angular-popup'
 import { ChatService } from 'src/app/services/chat.service';
 import { Router } from '@angular/router';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-chat',
@@ -18,8 +19,12 @@ export class ChatComponent implements OnInit {
     image:''
   }
 
-  newMessage: any;
+  newMessage: string = '';
   messageList:  string[] = [];
+
+  messageForm = new  FormGroup({
+    message:  new FormControl()
+  })
 
   constructor(private gamerServ : GamerService,private toast : NgToastService,private chatService:ChatService,private router : Router) { }
 
@@ -42,16 +47,12 @@ export class ChatComponent implements OnInit {
   openProfile()
   {
     this.router.navigateByUrl('/view-profile');
-   
   }
 
-  sendMessage()
+  sendMessage(messageForm:FormGroup)
   {
-    console.log(this.newMessage);
-    this.chatService.sendMessage(this.newMessage); 
-    this.newMessage = '';
-
-
+    this.chatService.sendMessage(messageForm.value.message); 
+    messageForm.reset();
   }
 
 }

@@ -38,7 +38,7 @@ const db = new Client({
      
   }
 
-const image = 'https://res.cloudinary.com/griend/image/upload/v1669475311/vecteezy_game-shop-vector-logo-design-shopping-bag-combination_10949766_hgwhg1.jpg';
+const image = 'https://res.cloudinary.com/dev-lab/image/upload/v1669475311/vecteezy_game-shop-vector-logo-design-shopping-bag-combination_10949766_hgwhg1.jpg';
 users = [];
 
 exports.register = async (req, res)=>{ 
@@ -73,19 +73,19 @@ exports.register = async (req, res)=>{
                                 expiresIn: 120000000
                             });
 
-                            //res.status(200).json({message: "Account successully registered",token: token,});
-                            emailDetails.from = sender;
-                            emailDetails.to = results.rows[0].email;
-                            emailDetails.text = "Welcome! "+results.rows[0].name+'\n\nThis is your generated gametag \n'+results.rows[0].gametag +'\nUse it to sign in to your account along with your password. \n\nGriend\nYour Gamer Friend.';
-                            emailDetails.subject = "Welcome to Griend";
+                            res.status(200).json({message: "Account successully registered",token: token,});
+                            // emailDetails.from = sender;
+                            // emailDetails.to = results.rows[0].email;
+                            // emailDetails.text = "Welcome! "+results.rows[0].name+'\n\nThis is your generated gametag \n'+results.rows[0].gametag +'\nUse it to sign in to your account along with your password. \n\nGriend\nYour Gamer Friend.';
+                            // emailDetails.subject = "Welcome to Griend";
 
-                            transporter.sendMail(emailDetails,(emailErr)=>{
-                                if(emailErr){
-                                    res.status(400).json(emailErr.message);
-                                }else{
-                                    res.status(200).json({message: "Account successully registered",token: token,});
-                                }
-                            });
+                            // transporter.sendMail(emailDetails,(emailErr)=>{
+                            //     if(emailErr){
+                            //         res.status(400).json(emailErr.message);
+                            //     }else{
+                            //         res.status(200).json({message: "Account successully registered",token: token,});
+                            //     }
+                            // });
 
                         }   
             })
