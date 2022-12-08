@@ -2,8 +2,10 @@ const express = require('express');
 var cors = require('cors');
 require("dotenv").config();
 const app = express();
+
 const http = require('http');
 const server = http.Server(app);
+
 
 const socketServer = require('http').createServer(app);
 const io = require('socket.io')(socketServer, {
@@ -22,10 +24,16 @@ const socketPort = 3000
 io.on('connection', (socket) => {
   console.log('a user connected');
 
-  socket.on('message', (message) => {
-    console.log(message);
-    io.emit('message',message);
+  io.on("join-room",(roomId) => {
+    
+    socket.join(roomId);
+    
+    socket.on('message', (message) => {
+        console.log(message);
+        io.to(roomId).emit('message',message);
+      });
   });
+  
 
   socket.on('disconnect', () => {
     console.log('a user disconnected!');

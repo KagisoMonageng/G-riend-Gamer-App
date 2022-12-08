@@ -7,6 +7,10 @@ router.post('/register',gamer.register);
 
 router.post('/login',gamer.login);
 
+router.get('/openChat/:roomId',gamer.ChatRequest)
+
+router.patch('/addFriend/:gametag/:friendTag',gamer.addFriend)
+
 router.get('/searchGamers/:gametag',gamer.searchGamers);
 
 router.get('/search/:gametag',gamer.getOneGamer);

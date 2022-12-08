@@ -20,7 +20,25 @@ export class ChatService {
   })
 
   constructor() {
+    
    }
+
+   public createRoom(roomNo: number)
+   {
+    this.socket.emit('create-room',roomNo)
+   }
+
+   public joinRoom(roomNo: number)
+   {
+    this.socket.emit('join-room',roomNo)
+   }
+
+   public leaveRoom(roomNo: number)
+   {
+    this.socket.emit('leave-room',roomNo)
+   }
+
+
 
   public sendMessage(message: Message) {
     this.socket.emit('message', message);

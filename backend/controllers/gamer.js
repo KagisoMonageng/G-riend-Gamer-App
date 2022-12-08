@@ -1,22 +1,22 @@
 const Client = require('pg').Pool;
 const jwt = require("jsonwebtoken");
 var nodemailer = require('nodemailer');
-var io = require('../server');
+
+const express = require('express');
+const app = express();
+const socketServer = require('http').createServer(app);
+const io = require('socket.io')(socketServer, {
+    cors: {origin : '*'}
+  });
 var smtpTransport = require('nodemailer-smtp-transport');
 
-// const db = new Pool({
-//     user: 'admin',  //Database username
-//     host: 'localhost',  //Database host
-//     database: 'griend_db', //Database database
-//     password: 'admin12345', //Database password
-//     port: 5433//Database port
-//   })
 const db = new Client({
-   connectionString: 'postgres://szqwffyzfcbzen:59835fb400b6bee81e96691a83d6b5d954778e1d00a632b58185c10fe8054025@ec2-54-165-178-178.compute-1.amazonaws.com:5432/d42j382g86r983',
-   ssl:{rejectUnauthorized: false}
+    user: 'admin',  //Database username
+    host: 'localhost',  //Database host
+    database: 'griend_db', //Database database
+    password: 'admin12345', //Database password
+    port: 5433//Database port
   })
-
-
 
 
   const sender =  "griendgamer@outlook.com";
@@ -274,20 +274,56 @@ exports.updateGamer = async (req, res)=>{
       })
 }
 
-exports.connect = (req, res) => {
+exports.ChatRequest = (req, res) => {
+
+    const roomId = req.params.roomId;
 
     io.on('connection', (socket) => {
         console.log('a user connected');
-      
-        socket.on('message', (message) => {
-          console.log(message);
-          io.emit('message', `${message}`);
-        });
-      
+        io.of("/").adapter.on("create-room", (roomId) => {
+            console.log(`room ${roomId} was created`);
+            socket.join(roomId);
+
+            socket.on('message', (message) => {
+                console.log(message);
+                io.to(roomId).emit('message',message);
+              });
+          });
+
         socket.on('disconnect', () => {
           console.log('a user disconnected!');
         });
       });
+
+}
+
+exports.addFriend = (req, res) => {
+    const {gametag , friendTag}= req.params;
+    db.query('SELECT * FROM gamers WHERE gametag = $1',[gametag],(err, results)=>{
+        if(err){
+            res.status(400).json({message:'Query failed'})
+        }else{
+            var friendObj = [];
+
+            friendObj = results.rows[0].friends; 
+
+            let friends = friendObj.concat(friendTag);
+
+            db.query('UPDATE gamers SET friends = $1 where gametag = $2',[friends,gametag],(err, results)=>{
+
+                if(err){
+                    res.status(400).json({message:'Query failed'})
+                }else{
+                    res.status(200).json({message:'Friend Added'});
+                }
+            })
+            
+        }
+
+        
+    });
+
+   
 
 }
 
