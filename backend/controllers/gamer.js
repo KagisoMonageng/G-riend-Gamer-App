@@ -1,6 +1,7 @@
 const Client = require('pg').Pool;
 const jwt = require("jsonwebtoken");
 var nodemailer = require('nodemailer');
+var io = require('../server');
 var smtpTransport = require('nodemailer-smtp-transport');
 
 // const db = new Pool({
@@ -36,6 +37,14 @@ const db = new Client({
     text: '', //email
     
      
+  }
+
+  messageData = {
+    message:'',
+    sender: '', 
+    reciepient:'',
+    time: ''
+
   }
 
 const image = 'https://res.cloudinary.com/dev-lab/image/upload/v1669475311/vecteezy_game-shop-vector-logo-design-shopping-bag-combination_10949766_hgwhg1.jpg';
@@ -126,6 +135,7 @@ exports.login =  (req, res)=>{
                                 algorithm: 'HS256',
                                 expiresIn: 120000000
                             });
+                            
                             res.status(200).json({message: "Welcome! "+results.rows[0].name,token: token,}); 
                    }
                 
@@ -164,6 +174,7 @@ exports.getOneGamer = (req, res) => {
             else
             {
                 res.status(200).json(results.rows[0]);
+                
             }
         }
     })
@@ -204,7 +215,6 @@ exports.forgotPassword  = (req, res) =>{
 
 
 }
-
 
 exports.updateImage = async (req,res) => {
     const link = req.body.link;
@@ -263,6 +273,26 @@ exports.updateGamer = async (req, res)=>{
     
       })
 }
+
+exports.connect = (req, res) => {
+
+    io.on('connection', (socket) => {
+        console.log('a user connected');
+      
+        socket.on('message', (message) => {
+          console.log(message);
+          io.emit('message', `${message}`);
+        });
+      
+        socket.on('disconnect', () => {
+          console.log('a user disconnected!');
+        });
+      });
+
+}
+
+
+
 
 
 

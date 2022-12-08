@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.spinner.show()
-    if(localStorage.getItem('key')!=null)
+    if(sessionStorage.getItem('key')!=null)
     {
       this.toast.success({detail:"Welcome back", summary:"You are already logged in.",position:'tr',duration:2000})
       this.router.navigateByUrl('/home');

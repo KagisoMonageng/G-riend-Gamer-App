@@ -51,11 +51,11 @@ export class EditProfileComponent implements OnInit {
   ngOnInit(): void {
     this.spinner.show();
     
-    this.surname = this.jwt.getData(JSON.stringify(localStorage.getItem('key'))).surname;
-    this.name = this.jwt.getData(JSON.stringify(localStorage.getItem('key'))).name;
-    this.email = this.jwt.getData(JSON.stringify(localStorage.getItem('key'))).email;
-    this.gametag = this.jwt.getData(JSON.stringify(localStorage.getItem('key'))).gametag;
-    this.image_link = this.jwt.getData(JSON.stringify(localStorage.getItem('key'))).image;
+    this.surname = this.jwt.getData(JSON.stringify(sessionStorage.getItem('key'))).surname;
+    this.name = this.jwt.getData(JSON.stringify(sessionStorage.getItem('key'))).name;
+    this.email = this.jwt.getData(JSON.stringify(sessionStorage.getItem('key'))).email;
+    this.gametag = this.jwt.getData(JSON.stringify(sessionStorage.getItem('key'))).gametag;
+    this.image_link = this.jwt.getData(JSON.stringify(sessionStorage.getItem('key'))).image;
     setTimeout(() => {
       /* spinner ends after 2 seconds */
       this.spinner.hide();
@@ -128,7 +128,7 @@ export class EditProfileComponent implements OnInit {
       
       this.gamerServ.updateProfilePicture(this.gametag,this.image).subscribe((saveData:any)=>{
         this.authService.saveToken(saveData.token);
-        localStorage.setItem('image_link',this.image_link);
+        sessionStorage.setItem('image_link',this.image_link);
 
         this.spinner.hide();
        
