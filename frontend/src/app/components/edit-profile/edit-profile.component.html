@@ -79,8 +79,11 @@
         <div class="games mt-4 w-80 h-52 mr-auto ml-auto">
             <p class="text text-center font-normal mb-4">My Games</p>
 
-            <div class="games-grid w-full">
-
+            <div class="games-grid w-full flex flex-wrap justify-around">
+                <div *ngFor="let game of games" class="flex flex-col text-center">
+                    <img src="{{game.image}}" alt="" width="50" height="50" class="object-cover">
+                    <p>{{game.name}}</p>
+                </div>
             </div>
         </div>
 

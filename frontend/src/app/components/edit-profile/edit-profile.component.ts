@@ -21,6 +21,9 @@ export class EditProfileComponent implements OnInit {
   email ?:string;
   image_link: any;
 
+  game_ids = [];
+  games : any = [];
+
   preset :string = "i8maua2c";
 
   update_dp = new FormGroup({
@@ -50,12 +53,29 @@ export class EditProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.spinner.show();
+
+    
     
     this.surname = this.jwt.getData(JSON.stringify(sessionStorage.getItem('key'))).surname;
     this.name = this.jwt.getData(JSON.stringify(sessionStorage.getItem('key'))).name;
     this.email = this.jwt.getData(JSON.stringify(sessionStorage.getItem('key'))).email;
     this.gametag = this.jwt.getData(JSON.stringify(sessionStorage.getItem('key'))).gametag;
     this.image_link = this.jwt.getData(JSON.stringify(sessionStorage.getItem('key'))).image;
+
+    this.gamerServ.getMyFavs(this.gametag).subscribe((data:any)=>{
+      
+      this.game_ids = data;
+      
+      for (let index = 0; index < this.game_ids.length; index++) {
+        this.gamerServ.getOneGame(this.game_ids[index]).subscribe((game:any)=>{
+          this.games.push(game);
+        })
+    
+      }
+      
+
+    })
+
     setTimeout(() => {
       /* spinner ends after 2 seconds */
       this.spinner.hide();

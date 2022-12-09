@@ -37,7 +37,16 @@ export class GamerService {
   {
     let data = {friendTag : gametag}
     return this.http.patch(this.url+'/addFriend/'+sessionStorage.getItem('loggedIn_gamer'),data);
+  }
 
+  getMyFavs(gametag:any)
+  {
+    return this.http.get(this.url+'/getGames/'+gametag);
+
+  }
+  getOneGame(game_id:number)
+  {
+    return this.http.get(this.url+'/getGame/'+game_id);
   }
 
 }

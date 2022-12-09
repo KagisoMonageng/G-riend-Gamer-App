@@ -18,26 +18,11 @@ export class HomeComponent implements OnInit {
   constructor(private jwt : JwtService,private auth : AuthService,private gamer : GamerService,private router:Router) {}
 
   ngOnInit(): void {
-    console.log(this.jwt.getData(JSON.stringify(sessionStorage.getItem('key'))).gametag)
-
-    this.gamer.getGamers(this.jwt.getData(JSON.stringify(sessionStorage.getItem('key'))).gametag).subscribe((gamers:any)=>{
-      //this.friends = gamers;
-      //console.log(gamers)
-
-    })
+    
     
   }
 
-  openGamerChat(gamer:any)
-  {
-    // this.gamer.getOneGamer(gametag).subscribe(async(gamerDetails:any)=>{
-
-    this.selectedGamersDetails = gamer
-    sessionStorage.setItem('selected',gamer.gametag)
-    //})
-    this.router.navigateByUrl('/chat');
-
-  }
+  
   
 
 }
