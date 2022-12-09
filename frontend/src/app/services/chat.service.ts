@@ -25,7 +25,7 @@ export class ChatService {
 
    public createRoom(roomNo: number)
    {
-    this.socket.emit('create-room',roomNo)
+    this.socket.emit("create-room",roomNo)
    }
 
    public joinRoom(roomNo: number)

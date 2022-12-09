@@ -24,22 +24,25 @@ const socketPort = 3000
 io.on('connection', (socket) => {
   console.log('a user connected');
 
-  io.on("join-room",(roomId) => {
-    
-    socket.join(roomId);
-    
-    socket.on('message', (message) => {
-        console.log(message);
-        io.to(roomId).emit('message',message);
-      });
-  });
-  
+  // io.on("join-room",(roomId) => {
+  //   socket.on('message', (message) => {
+  //       console.log(message);
+  //       io.to(roomId).emit('message',message);
+  //     });
+  // });
+
+  //   io.of("/").adapter.on("create-room", (roomId) => {
+  //     console.log(`room ${roomId} was created`);
+  //     routes.route('')
+
+  //     socket.join(roomId);
+  //   })
+
 
   socket.on('disconnect', () => {
     console.log('a user disconnected!');
   });
 });
-
 
 
 app.use(express.json());

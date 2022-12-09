@@ -12,7 +12,7 @@ import { JwtService } from 'src/app/services/jwt/jwt.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  gamers: any = [];
+  friends: any = [];
   selectedGamersDetails: any;
 
   constructor(private jwt : JwtService,private auth : AuthService,private gamer : GamerService,private router:Router) {}
@@ -21,8 +21,8 @@ export class HomeComponent implements OnInit {
     console.log(this.jwt.getData(JSON.stringify(sessionStorage.getItem('key'))).gametag)
 
     this.gamer.getGamers(this.jwt.getData(JSON.stringify(sessionStorage.getItem('key'))).gametag).subscribe((gamers:any)=>{
-      this.gamers = gamers;
-      console.log(gamers)
+      //this.friends = gamers;
+      //console.log(gamers)
 
     })
     

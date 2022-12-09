@@ -9,13 +9,14 @@ const io = require('socket.io')(socketServer, {
     cors: {origin : '*'}
   });
 var smtpTransport = require('nodemailer-smtp-transport');
+const { randomInt } = require('crypto');
 
 const db = new Client({
     user: 'admin',  //Database username
     host: 'localhost',  //Database host
     database: 'griend_db', //Database database
     password: 'admin12345', //Database password
-    port: 5433//Database port
+    port: 5432//Database port
   })
 
 
@@ -298,22 +299,36 @@ exports.ChatRequest = (req, res) => {
 }
 
 exports.addFriend = (req, res) => {
-    const {gametag , friendTag}= req.params;
-    db.query('SELECT * FROM gamers WHERE gametag = $1',[gametag],(err, results)=>{
-        if(err){
-            res.status(400).json({message:'Query failed'})
+    const gametag = req.params.gametag;
+    const friendTag = req.body.friendTag
+    
+    db.query('SELECT * FROM gamers WHERE gametag = $1',[friendTag],(err, results)=>{
+        if(results.rows==0){
+            res.status(400).json({message:'No user found'})
         }else{
-            var friendObj = [];
-
-            friendObj = results.rows[0].friends; 
-
-            let friends = friendObj.concat(friendTag);
-
-            db.query('UPDATE gamers SET friends = $1 where gametag = $2',[friends,gametag],(err, results)=>{
-
+            
+            db.query('UPDATE gamers SET friends = array_append(friends, $1) where gametag = $2',[friendTag,gametag],(err, results)=>{
                 if(err){
+                    console.log(err)
                     res.status(400).json({message:'Query failed'})
                 }else{
+                    
+                    io.on('connection', (socket) => {
+                        console.log('a user connected');
+                        io.on("create-room", (roomId) => {
+                            console.log(`room ${roomId} was created`);
+                            socket.join(roomId);
+                
+                            socket.on('message', (message) => {
+                                console.log(message);
+                                io.to(roomId).emit('message',message);
+                              });
+                          });
+                
+                        socket.on('disconnect', () => {
+                          console.log('a user disconnected!');
+                        });
+                      });
                     res.status(200).json({message:'Friend Added'});
                 }
             })

@@ -19,6 +19,7 @@ import { ChatComponent } from './components/chat/chat.component'
 import { io, Socket } from 'socket.io-client';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { ViewProfileComponent } from './components/view-profile/view-profile.component';
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ViewProfileComponent } from './components/view-profile/view-profile.com
     NavBarComponent,
     ChatComponent,
     EditProfileComponent,
-    ViewProfileComponent
+    ViewProfileComponent,
+    SearchComponent
   ],
   imports: [
     CommonModule,

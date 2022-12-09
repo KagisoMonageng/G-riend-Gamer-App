@@ -33,4 +33,11 @@ export class GamerService {
     return this.http.get(this.url+'/search/'+gametag);
   }
 
+  addFriend(gametag:string)
+  {
+    let data = {friendTag : gametag}
+    return this.http.patch(this.url+'/addFriend/'+sessionStorage.getItem('loggedIn_gamer'),data);
+
+  }
+
 }
