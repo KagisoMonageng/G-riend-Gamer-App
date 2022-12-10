@@ -1,11 +1,19 @@
+<app-nav-bar></app-nav-bar>
 <div class="container mx-auto px-3 justify-center md:px-3 lg:px-3 ">
-    <div class="min-h-screen">
-        <app-nav-bar></app-nav-bar>
+    <div class="min-h-screen pt-24">
+        <ngx-spinner bdColor = "rgba(43, 80, 46, 0.8)" size = "default" color = "#fff" type = "square-jelly-box" [fullScreen] = "false"><p style="color: white" > Hang on ... </p></ngx-spinner>
+
         <div class="mt-4 ">
+            <p class="text-sm font-semibold my-1">Featured Games</p>
+            <div class="games-grid w-full grid grid-cols-4 gap-1 items-center content-center justify-around">
+                <div *ngFor="let game of games" (click)="setGameID(game.game_id)"  class="flex flex-col text-center justify-center bg-secondary p-2 rounded-lg bg-opacity-20 hover:bg-opacity-50 hover:shadow-md transition-all hover:scale-105 ">
+                    <img [src]="game.image" alt=""  class="w-16 h-16 rounded-lg object-cover mx-auto">
+                    <p class="text-center text-xs mx-auto my-1 content-center items-center">{{game.name}}</p>
+                </div>
+            </div>
             
             
         </div>
-        <ngx-spinner bdColor = "rgba(43, 80, 46, 0.8)" size = "default" color = "#fff" type = "square-jelly-box" [fullScreen] = "false"><p style="color: white" > Hang on ... </p></ngx-spinner>
         
     </div>
 </div>

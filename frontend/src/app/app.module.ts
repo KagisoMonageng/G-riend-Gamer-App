@@ -20,6 +20,7 @@ import { io, Socket } from 'socket.io-client';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { ViewProfileComponent } from './components/view-profile/view-profile.component';
 import { SearchComponent } from './components/search/search.component';
+import { ViewGameComponent } from './components/view-game/view-game.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { SearchComponent } from './components/search/search.component';
     ChatComponent,
     EditProfileComponent,
     ViewProfileComponent,
-    SearchComponent
+    SearchComponent,
+    ViewGameComponent
   ],
   imports: [
     CommonModule,

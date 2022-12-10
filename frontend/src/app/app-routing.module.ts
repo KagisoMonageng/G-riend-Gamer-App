@@ -7,6 +7,7 @@ import { IndexComponent } from './components/index/index.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { SearchComponent } from './components/search/search.component';
+import { ViewGameComponent } from './components/view-game/view-game.component';
 import { ViewProfileComponent } from './components/view-profile/view-profile.component';
 import { GamerGuard } from './guards/gamer.guard';
 
@@ -19,6 +20,8 @@ const routes: Routes = [
   {path:'profile', component:EditProfileComponent,canActivate: [GamerGuard]},
   {path:'view-profile', component:ViewProfileComponent,canActivate: [GamerGuard]},
   {path:'search', component:SearchComponent,canActivate: [GamerGuard]},
+  {path:'view-game', component:ViewGameComponent,canActivate: [GamerGuard]},
+
 
 
 

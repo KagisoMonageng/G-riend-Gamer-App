@@ -72,7 +72,6 @@ export class EditProfileComponent implements OnInit {
         })
     
       }
-      
 
     })
 

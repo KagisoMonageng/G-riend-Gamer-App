@@ -1,42 +1,38 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { async } from '@angular/core/testing';
 import { Router } from '@angular/router';
+import { Game } from 'src/app/interfaces/game';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { ChatService } from 'src/app/services/chat.service';
 import { GamerService } from 'src/app/services/gamer/gamer.service';
 import { JwtService } from 'src/app/services/jwt/jwt.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: 'app-view-game',
+  templateUrl: './view-game.component.html',
+  styleUrls: ['./view-game.component.scss']
 })
-export class HomeComponent implements OnInit {
-  
-  selectedGamersDetails: any;
-  games: any = [];
+export class ViewGameComponent implements OnInit {
+
+  game : Game = {
+    name: '',
+    publisher: '',
+    image: '',
+    category: ''
+  }
+
 
   constructor(private jwt : JwtService,private auth : AuthService,private gamer : GamerService,private router:Router) {}
 
   ngOnInit(): void {
 
-    this.gamer.getGames().subscribe((games :any)=>{
-      this.games = games;
+    this.gamer.getOneGame(sessionStorage.getItem('selectedGame')).subscribe((game:Game)=>{
+      this.game = game;
+
     },(err:HttpErrorResponse)=>{
 
     })
 
+
   }
-
-
-  setGameID(game_id:any)
-  {
-    sessionStorage.setItem('selectedGame',game_id)
-    this.router.navigateByUrl('/view-game')
-  }
-
-  
-  
 
 }
