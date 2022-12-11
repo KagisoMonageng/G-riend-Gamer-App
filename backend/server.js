@@ -20,9 +20,8 @@ const routes = require("./routes/routes");
 const port = 8080
 const socketPort = 3000
 
-
 io.on('connection', (socket) => {
-  console.log('a user connected');
+  //console.log('a user connected');
 
   // io.on("join-room",(roomId) => {
   //   socket.on('message', (message) => {
@@ -39,9 +38,9 @@ io.on('connection', (socket) => {
   //   })
 
 
-  socket.on('disconnect', () => {
-    console.log('a user disconnected!');
-  });
+  // socket.on('disconnect', () => {
+  //   console.log('a user disconnected!');
+  // });
 });
 
 

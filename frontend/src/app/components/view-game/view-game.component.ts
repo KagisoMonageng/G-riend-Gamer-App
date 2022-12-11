@@ -17,7 +17,10 @@ export class ViewGameComponent implements OnInit {
     name: '',
     publisher: '',
     image: '',
-    category: ''
+    category: '',
+    full_name: '',
+    description:'',
+    url:''
   }
 
 

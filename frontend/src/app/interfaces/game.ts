@@ -3,4 +3,7 @@ export interface Game{
     publisher:string
     image:string
     category: string
+    full_name:string
+    description:string
+    url:string
 }

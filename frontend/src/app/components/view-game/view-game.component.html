@@ -3,11 +3,11 @@
        
         <ngx-spinner bdColor = "rgba(43, 80, 46, 0.8)" size = "default" color = "#fff" type = "square-jelly-box" [fullScreen] = "false"><p style="color: white" > Hang on ... </p></ngx-spinner>
 
-        <div class="hero min-h-screen img " style="background-image: url('../../../assets/nfs-unbound-button-fin-1665517112800.jpg'); background-size: cover;">
+        <div class="hero min-h-screen img " style="background-image: url({{game.image}}); background-size: cover;">
             <div class="hero-overlay bg-opacity-10">
                 <div class="hero-content mt-24 px-4 text-left flex-col">
 
-                    <h1 class="font-bold text-lg">{{game.name}}</h1>
+                    <h1 class="font-bold text-lg">{{game.full_name}}</h1>
                     <span class="text-xs font-light -mt-4">{{game.category}}</span>
                     <!-- Console Icons -->
                     <div class="flex gap-3 -mt-2">
@@ -18,30 +18,23 @@
                     </div>
 
                     <div class="main-images">
-                        <img src="../../../assets/nfs-unbound-button-fin-1665517112800.jpg" class="w-80 h-80 rounded-xl mx-auto" alt="">
-                        <div class="screenshots w-80 flex gap-2 overflow-x-scroll scroll-smooth overflow-clip mt-3">
-                            <img src="../../../assets/nfs-unbound-button-fin-1665517112800.jpg" class="w-20 h-20 rounded-md mx-auto" alt="">
-                            
-                            <img src="../../../assets/nfs-unbound-button-fin-1665517112800.jpg" class="w-20 h-20 rounded-md mx-auto" alt="">
-
-                            <img src="../../../assets/nfs-unbound-button-fin-1665517112800.jpg" class="w-20 h-20 rounded-md mx-auto" alt="">
-
-                            <img src="../../../assets/nfs-unbound-button-fin-1665517112800.jpg" class="w-20 h-20 rounded-md mx-auto" alt="">
-
-                            <img src="../../../assets/nfs-unbound-button-fin-1665517112800.jpg" class="w-20 h-20 rounded-md mx-auto" alt="">
-
-                            <img src="../../../assets/nfs-unbound-button-fin-1665517112800.jpg" class="w-20 h-20 rounded-md mx-auto" alt="">
-
-                        </div>
+                        <img src="{{game.image}}" class="w-80 h-80 rounded-xl mx-auto object-cover" alt="">
+                    
 
                     </div>
 
                     <div class="info">
-                        <span class="text-md font-semibold">About the game</span>
+                        <span class="text-md font-semibold mb-2">About the game</span>
                         <p class="desc">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magni, molestiae sint? Voluptate consequuntur ad et repellendus, non suscipit quidem voluptates dignissimos repudiandae eaque. Iure ullam expedita eligendi vitae eaque nisi?
+                            {{game.description}}
                         </p>
+                        <p class="flex gap-2 content-center my-3 ">
+                            <a href="{{game.url}}" class="link font-semibold no-underline">Visit Website </a><i class="fi fi-rr-world my-auto"></i>
+                        </p>
+                        
                     </div>
+
+
 
                     <div class="comments">
 
