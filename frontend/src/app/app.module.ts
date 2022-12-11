@@ -21,6 +21,7 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
 import { ViewProfileComponent } from './components/view-profile/view-profile.component';
 import { SearchComponent } from './components/search/search.component';
 import { ViewGameComponent } from './components/view-game/view-game.component';
+import { CommentsComponent } from './components/comments/comments.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ViewGameComponent } from './components/view-game/view-game.component';
     EditProfileComponent,
     ViewProfileComponent,
     SearchComponent,
-    ViewGameComponent
+    ViewGameComponent,
+    CommentsComponent
   ],
   imports: [
     CommonModule,
