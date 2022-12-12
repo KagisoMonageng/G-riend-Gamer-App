@@ -1,13 +1,5 @@
-const Client = require('pg').Pool;
 
-const db = new Client({
-    user: 'admin',  //Database username
-    host: 'localhost',  //Database host
-    database: 'griend_db', //Database database
-    password: 'admin12345', //Database password
-    port: 5433//Database port
-  })
-
+const db = require('../config/db_config')
 
   exports.getAllGames = async (req, res) => {
 

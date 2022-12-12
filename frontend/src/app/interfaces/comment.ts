@@ -1,7 +1,7 @@
 export interface Comment{
     comment_id:number
     gametag:any
-    image:string
+    image:any
     game_id:any
     date: any
     comment:string

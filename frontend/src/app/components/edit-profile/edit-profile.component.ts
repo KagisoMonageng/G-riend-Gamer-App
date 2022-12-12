@@ -53,9 +53,6 @@ export class EditProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.spinner.show();
-
-    
-    
     this.surname = this.jwt.getData(JSON.stringify(sessionStorage.getItem('key'))).surname;
     this.name = this.jwt.getData(JSON.stringify(sessionStorage.getItem('key'))).name;
     this.email = this.jwt.getData(JSON.stringify(sessionStorage.getItem('key'))).email;

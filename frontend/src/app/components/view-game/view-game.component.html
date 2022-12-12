@@ -5,7 +5,7 @@
 
         <div class="hero min-h-screen img " style="background-image: url({{game.image}}); background-size: cover;">
             <div class="hero-overlay bg-opacity-10">
-                <div class="hero-content mt-24 px-4 text-left flex-col">
+                <div class="hero-content mt-20 px-4 text-left flex-col">
 
                     <h1 class="font-bold text-lg">{{game.full_name}}</h1>
                     <span class="text-xs font-light -mt-4">{{game.category}}</span>
@@ -28,7 +28,7 @@
                         <p class="desc">
                             {{game.description}}
                         </p>
-                        <p class="flex gap-2 content-center my-3 ">
+                        <p class="flex gap-2 content-center my-2">
                             <a href="{{game.url}}" class="link font-semibold no-underline">Visit Website </a><i class="fi fi-rr-world my-auto"></i>
                         </p>
                         
@@ -37,63 +37,67 @@
 
 
                     <div class="comments">
+                        <span class="text-md font-semibold mb-2">Comments</span>
+                        <div class="w-full px-0"> 
 
-                        <div tabindex="0" class="collapse"> 
-                           
-                            <a class="btn btn-sm btn-ghost w-fit content-center py-4 mx-auto capitalize">View Comments &nbsp; <i class="fi fi-rr-comment"></i></a>
-                            
-                            <div class="w-full px-0"> 
+                            <div *ngIf="comments.length==0 && !isCommenting">
+                                <div class="hero">
+                                    <div class="hero-content text-center">
+                                      <div class="max-w-md">
+                                        <h1 class="text-lg font-bold">No Comments</h1>
+                                        <p class="py-1">There are no new comments</p>
+                                        <button class="btn btn-primary btn-sm" (click)="toggleAdd()">Add Comment</button>
+                                      </div>
+                                    </div>
+                                  </div>
+                            </div>
 
-                                <div *ngIf="comments.length==0 && !isCommenting">
-                                    <div class="hero">
-                                        <div class="hero-content text-center">
-                                          <div class="max-w-md">
-                                            <h1 class="text-lg font-bold">No Comments</h1>
-                                            <p class="py-1">There are no new comments</p>
-                                            <button class="btn btn-primary btn-sm" (click)="toggleAdd()">Add Comment</button>
-                                          </div>
-                                        </div>
+                            <!-- Here -->
+                            <div class="comment my-4 transition-all flex justify-between " *ngFor="let comment of comments">
+                                
+                                <div class="flex content-center justify-start gap-2">
+                                    <div class="image">
+                                        <img [src]="comment.image" class="w-12 h-12 rounded-full object-cover" alt="">
+                                        
+                                    </div>
+                                    <div class="comment-text my-auto">
+                                        <h3 class="text-xs font-semibold">{{comment.gametag}}</h3>
+                                        <p class="text-sm comment-text w-52">{{comment.comment}}</p>
+                                    </div>
+                                </div>
+
+                                <div class="options" *ngIf="comment.gametag == gametag">
+                                    <div class="dropdown dropdown-top dropdown-end">
+                                        <label tabindex="0" class="btn m-1 btn-ghost bg-opacity-80 rounded-full"><i class="fi fi-rr-menu-dots-vertical"></i></label>
+                                        <ul tabindex="0" class="dropdown-content flex flex-col gap-2 p-3 shadow bg-base-100  bg-opacity-80 rounded-full">
+                                          <li class="rounded-full hover:bg-base-100 px-3 py-2" (click)="editComment(comment.comment_id,comment.comment)"><a><i class="fi fi-rr-pencil m-auto"></i></a></li>
+                                          <li class="rounded-full hover:bg-base-100 px-3 py-2" (click)="deleteComment(comment.comment_id)"><a><i class="fi fi-rr-trash m-auto"></i></a></li>
+                                        </ul>
                                       </div>
                                 </div>
+                                
+                            </div>
 
-                                <!-- Here -->
-                                <div class="comment my-4 transition-all flex justify-between gap-2" *ngFor="let comment of comments">
-                                    <div class="image flex-1">
-                                        <img src="../../../assets/nfs-unbound-button-fin-1665517112800.jpg" class="w-12 h-12 rounded-full object-cover" alt="comment-thumbnail">
-                                    </div>
-                                    <div class="comment-text">
-                                        <h3 class="text-xs font-semibold">{{comment.gametag}}</h3>
-                                        <p class="text-sm comment-text w-80">{{comment.comment}}</p>
-                                    </div>
-                                    
-                                </div>
+                            <div *ngIf="comments.length > 0 || isCommenting">
 
-                                <div *ngIf="comments.length>0 || isCommenting">
-
-                                    <form [formGroup]="commentForm" (ngSubmit)="addComment(commentForm)">
-                                        <div class="flex w-full p-3 gap-2" >
-                                            <input type="text" formControlName="comment" placeholder="type comment here" class="input flex-1 input-ghost" required>
-                                            <div class="icon-div">
-                                                <button type="submit"><svg xmlns="http://www.w3.org/2000/svg"  class="w-10 h-10 bg-base-100 rounded-lg bg-opacity-20 hover:bg-opacity-60 icon my-auto" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8l-8 6l-8.054-2.685z"/></svg></button>
-                                            </div>
+                                <form [formGroup]="commentForm" (ngSubmit)="addComment(commentForm)">
+                                    <div class="flex w-full p-3 gap-2" >
+                                        <input type="text" formControlName="comment" placeholder="type comment here" class="input flex-1 input-ghost" required>
+                                        <div class="icon-div ">
+                                            <button type="submit" class="btn btn-ghost bg-base-100 rounded-lg bg-opacity-20 hover:bg-opacity-60 px-4"><i class="fi fi-rr-comment"></i></button>
                                         </div>
-                                    </form>
+                                    </div>
+                                </form>
 
 
 
-
-                                </div>
-
-
-                                
-                                
 
                             </div>
 
-                            
-
 
                             
+                            
+
                         </div>
 
 

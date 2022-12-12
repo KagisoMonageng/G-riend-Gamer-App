@@ -1,15 +1,13 @@
-<app-nav-bar></app-nav-bar>
-<div class="container mx-auto px-3 justify-center md:px-3 lg:px-3 ">
+<app-nav-bar class="z-50"></app-nav-bar>
+<div class="container mx-auto px-3 justify-center md:px-3 lg:px-3  z-10">
     <div class="min-h-screen pt-24">
         
 
         <div class="mt-2">
 
 
-            <div class="search-input mx-auto text-center my-3 relative ">
-                <input type="text" [(ngModel)]="term" (change)="textInput($event)" placeholder="Search a game" class="input w-full mx-auto input-md max-w-xs input-box placeholder:text-center " minlength="2" required>
-                <i class="fi fi-rr-search absolute opacity-50 top-3.5 right-10"></i>
-
+            <div class="search-input mx-auto text-center my-3 ">
+                <input type="text" [(ngModel)]="term" (change)="textInput($event)" placeholder="Search a game" class="input w-full mx-auto input-md max-w-xs md:input-md md:max-w-xl input-box placeholder:text-center " minlength="2" required>
             </div>
 
             <p class="text-sm my-3" *ngIf="term.length>0">Showing search results for : <span class="font-semibold">{{term}}</span> </p>

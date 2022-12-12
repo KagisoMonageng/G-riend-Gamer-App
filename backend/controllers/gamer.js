@@ -11,13 +11,16 @@ const io = require('socket.io')(socketServer, {
 var smtpTransport = require('nodemailer-smtp-transport');
 const { randomInt } = require('crypto');
 
-const db = new Client({
-    user: 'admin',  //Database username
-    host: 'localhost',  //Database host
-    database: 'griend_db', //Database database
-    password: 'admin12345', //Database password
-    port: 5433//Database port
-  })
+// const db = new Client({
+//     user: 'admin',  //Database username
+//     host: 'localhost',  //Database host
+//     database: 'griend_db', //Database database
+//     password: 'admin12345', //Database password
+//     port: 5433//Database port
+//   })
+
+const db = require('../config/db_config')
+
 
 
   const sender =  "griendgamer@outlook.com";

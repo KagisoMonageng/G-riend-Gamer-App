@@ -7,6 +7,7 @@ import { Game } from 'src/app/interfaces/game';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { GamerService } from 'src/app/services/gamer/gamer.service';
 import { JwtService } from 'src/app/services/jwt/jwt.service';
+import { __values } from 'tslib';
 
 @Component({
   selector: 'app-view-game',
@@ -31,37 +32,37 @@ export class ViewGameComponent implements OnInit {
 
   isCommenting :boolean = false;
 
-  newComment:Comment =
-  {
+  newComment:any ={
     gametag: '',
     comment_id: 0,
-    image: '',
+    image: 0,
     game_id: 0,
     date: '',
     comment: ''
   }
+   image =''
 
+   gametag :any = ''
 
   constructor(private jwt : JwtService,private auth : AuthService,private gamer : GamerService,private router:Router) {}
 
   ngOnInit(): void {
 
+    this.gametag = sessionStorage.getItem('loggedIn_gamer');
     this.gamer.getOneGame(sessionStorage.getItem('selectedGame')).subscribe((game:Game)=>{
       this.game = game;
-
-      this.gamer.getComments(sessionStorage.getItem('selectedGame')).subscribe((comments:Comment[])=>{
-        this.comments = comments;
-      },(err:HttpErrorResponse)=>{
-        console.log(err)
-      })
-
+      this.getComments();
     },(err:HttpErrorResponse)=>{
-
       console.log(err)
-
     })
 
 
+    this.gamer.getOneGamer(sessionStorage.getItem('loggedIn_gamer')).subscribe(async (gamer:any)=>{
+      this.image = await gamer.image
+     //console.log(this.image)
+   },(err:HttpErrorResponse)=>{
+     console.log(err)
+   })
   }
 
   toggleAdd()
@@ -69,42 +70,62 @@ export class ViewGameComponent implements OnInit {
     this.isCommenting = true
   }
 
-  addComment(form: FormGroup)
-  {
 
-    this.gamer.getOneGamer(sessionStorage.getItem('loggedIn_gamer')).subscribe((gamer:any)=>{
-      this.newComment.image = gamer.image
+  getComments()
+  {
+    this.gamer.getComments(sessionStorage.getItem('selectedGame')).subscribe((comments:any)=>{
+      this.comments = comments;
+      //console.log()
     },(err:HttpErrorResponse)=>{
       console.log(err)
     })
+  }
 
-    
+  addComment(form: FormGroup)
+  {
 
+
+    this.newComment.image = this.image;
     this.newComment.comment = form.value.comment;
-    this.newComment.date = new Date().getDate() + '-'+new Date().getMonth() + '-' + new Date().getFullYear();
+    this.newComment.date = new Date().getMonth() + '-' + new Date().getDate() + '-'+ new Date().getFullYear();
     this.newComment.game_id = sessionStorage.getItem('selectedGame');
     this.newComment.gametag = sessionStorage.getItem('loggedIn_gamer'); 
+    console.log(this.newComment.comment_id)
+    if(this.newComment.comment_id == 0){
+        this.gamer.addComment(this.newComment.game_id,this.newComment).subscribe(async (result:any)=>{
+        this.getComments();
+      },(err:HttpErrorResponse)=>{
+        console.log(err);
+      })
 
+    }else if(this.newComment.comment_id > 0)
+    {
+      this.gamer.editComment(this.newComment.comment_id,this.newComment).subscribe(async (result:any)=>{
+      this.getComments();
+      this.newComment.comment_id = 0
 
-    this.gamer.addComment(this.newComment.game_id,this.newComment).subscribe((result:any)=>{
-
-    },(err:HttpErrorResponse)=>{
-      console.log(err);
-    })
+      },(err:HttpErrorResponse)=>{
+        console.log(err);
+      })
+    }
     
-    console.log(this.newComment)
-
 
     form.reset()
+  }
 
+  deleteComment(comment_id:any){
 
+    this.gamer.deleteComment(comment_id,null).subscribe(async (result:any)=>{
+      this.getComments();
+    },(err:HttpErrorResponse)=>{
+      console.log(err);
+    });
 
+  }
 
-
-
-
-
-
+  editComment(comment_id:any,comment:any){
+    this.commentForm.setValue({comment:comment});
+    this.newComment.comment_id = comment_id;  
     
   }
 

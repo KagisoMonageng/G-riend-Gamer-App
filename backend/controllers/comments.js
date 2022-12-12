@@ -1,12 +1,5 @@
-const Client = require('pg').Pool;
 
-const db = new Client({
-    user: 'admin',  //Database username
-    host: 'localhost',  //Database host
-    database: 'griend_db', //Database database
-    password: 'admin12345', //Database password
-    port: 5433//Database port
-  })
+const db = require('../config/db_config')
 
 
   exports.getComments = async (req, res)=>{ 
@@ -30,11 +23,11 @@ const db = new Client({
   exports.addComment = async (req, res)=>{ 
 
     const {game_id,gametag} = req.params; //saved in the sessionStorage
-    const {comment,date} = req.body;
+    const {comment,date,image} = req.body;
+    //console.log(req.body);
 
-
-    const sql = 'Insert INTO comments (game_id,gametag,comment,date,hidden) VALUES ($1,$2,$3,$4,$5)'
-    db.query(sql,[game_id,gametag,comment,date,false],(err, results)=>{
+    const sql = 'Insert INTO comments (game_id,gametag,comment,date,image,hidden) VALUES ($1,$2,$3,$4,$5,$6)'
+    db.query(sql,[game_id,gametag,comment,date,image,false],(err, results)=>{
         if (err){
             console.log(err)
             res.status(400).json({message:'Database connection error'});
@@ -62,7 +55,6 @@ const db = new Client({
         }
     })
 
-    
   }
 
   exports.deleteComment = async (req, res)=>{ 
