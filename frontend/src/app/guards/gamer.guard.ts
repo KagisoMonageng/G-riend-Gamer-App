@@ -17,7 +17,7 @@ export class GamerGuard implements CanActivate {
       //const expiryDate = this.jwt.getTokenExpirationDate(JSON.stringify(localStorage.getItem('key')))
 
       //console.log(expiryDate);
-      if((localStorage.getItem('key')!= null)){
+      if((sessionStorage.getItem('key')!= null)){
         return true;
       }else{
         this.toast.error({detail:"Sorry!", summary:'You need to login first',position:'tr',duration:2000})

@@ -19,6 +19,9 @@ import { ChatComponent } from './components/chat/chat.component'
 import { io, Socket } from 'socket.io-client';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { ViewProfileComponent } from './components/view-profile/view-profile.component';
+import { SearchComponent } from './components/search/search.component';
+import { ViewGameComponent } from './components/view-game/view-game.component';
+import { CommentsComponent } from './components/comments/comments.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,10 @@ import { ViewProfileComponent } from './components/view-profile/view-profile.com
     NavBarComponent,
     ChatComponent,
     EditProfileComponent,
-    ViewProfileComponent
+    ViewProfileComponent,
+    SearchComponent,
+    ViewGameComponent,
+    CommentsComponent
   ],
   imports: [
     CommonModule,

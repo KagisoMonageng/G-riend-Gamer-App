@@ -1,21 +1,23 @@
 const Client = require('pg').Pool;
 const jwt = require("jsonwebtoken");
 var nodemailer = require('nodemailer');
+
+const express = require('express');
+const app = express();
+const socketServer = require('http').createServer(app);
+const io = require('socket.io')(socketServer, {
+    cors: {origin : '*'}
+  });
 var smtpTransport = require('nodemailer-smtp-transport');
+const { randomInt } = require('crypto');
 
-// const db = new Pool({
-//     user: 'admin',  //Database username
-//     host: 'localhost',  //Database host
-//     database: 'griend_db', //Database database
-//     password: 'admin12345', //Database password
-//     port: 5433//Database port
-//   })
 const db = new Client({
-   connectionString: 'postgres://szqwffyzfcbzen:59835fb400b6bee81e96691a83d6b5d954778e1d00a632b58185c10fe8054025@ec2-54-165-178-178.compute-1.amazonaws.com:5432/d42j382g86r983',
-   ssl:{rejectUnauthorized: false}
+    user: 'admin',  //Database username
+    host: 'localhost',  //Database host
+    database: 'griend_db', //Database database
+    password: 'admin12345', //Database password
+    port: 5432//Database port
   })
-
-
 
 
   const sender =  "griendgamer@outlook.com";
@@ -38,7 +40,15 @@ const db = new Client({
      
   }
 
-const image = 'https://res.cloudinary.com/griend/image/upload/v1669475311/vecteezy_game-shop-vector-logo-design-shopping-bag-combination_10949766_hgwhg1.jpg';
+  messageData = {
+    message:'',
+    sender: '', 
+    reciepient:'',
+    time: ''
+
+  }
+
+const image = 'https://res.cloudinary.com/dev-lab/image/upload/v1669475311/vecteezy_game-shop-vector-logo-design-shopping-bag-combination_10949766_hgwhg1.jpg';
 users = [];
 
 exports.register = async (req, res)=>{ 
@@ -73,19 +83,19 @@ exports.register = async (req, res)=>{
                                 expiresIn: 120000000
                             });
 
-                            //res.status(200).json({message: "Account successully registered",token: token,});
-                            emailDetails.from = sender;
-                            emailDetails.to = results.rows[0].email;
-                            emailDetails.text = "Welcome! "+results.rows[0].name+'\n\nThis is your generated gametag \n'+results.rows[0].gametag +'\nUse it to sign in to your account along with your password. \n\nGriend\nYour Gamer Friend.';
-                            emailDetails.subject = "Welcome to Griend";
+                            res.status(200).json({message: "Account successully registered",token: token,});
+                            // emailDetails.from = sender;
+                            // emailDetails.to = results.rows[0].email;
+                            // emailDetails.text = "Welcome! "+results.rows[0].name+'\n\nThis is your generated gametag \n'+results.rows[0].gametag +'\nUse it to sign in to your account along with your password. \n\nGriend\nYour Gamer Friend.';
+                            // emailDetails.subject = "Welcome to Griend";
 
-                            transporter.sendMail(emailDetails,(emailErr)=>{
-                                if(emailErr){
-                                    res.status(400).json(emailErr.message);
-                                }else{
-                                    res.status(200).json({message: "Account successully registered",token: token,});
-                                }
-                            });
+                            // transporter.sendMail(emailDetails,(emailErr)=>{
+                            //     if(emailErr){
+                            //         res.status(400).json(emailErr.message);
+                            //     }else{
+                            //         res.status(200).json({message: "Account successully registered",token: token,});
+                            //     }
+                            // });
 
                         }   
             })
@@ -126,6 +136,7 @@ exports.login =  (req, res)=>{
                                 algorithm: 'HS256',
                                 expiresIn: 120000000
                             });
+                            
                             res.status(200).json({message: "Welcome! "+results.rows[0].name,token: token,}); 
                    }
                 
@@ -164,6 +175,7 @@ exports.getOneGamer = (req, res) => {
             else
             {
                 res.status(200).json(results.rows[0]);
+                
             }
         }
     })
@@ -204,7 +216,6 @@ exports.forgotPassword  = (req, res) =>{
 
 
 }
-
 
 exports.updateImage = async (req,res) => {
     const link = req.body.link;
@@ -263,6 +274,76 @@ exports.updateGamer = async (req, res)=>{
     
       })
 }
+
+exports.ChatRequest = (req, res) => {
+
+    const roomId = req.params.roomId;
+
+    io.on('connection', (socket) => {
+        console.log('a user connected');
+        io.of("/").adapter.on("create-room", (roomId) => {
+            console.log(`room ${roomId} was created`);
+            socket.join(roomId);
+
+            socket.on('message', (message) => {
+                console.log(message);
+                io.to(roomId).emit('message',message);
+              });
+          });
+
+        socket.on('disconnect', () => {
+          console.log('a user disconnected!');
+        });
+      });
+
+}
+
+exports.addFriend = (req, res) => {
+    const gametag = req.params.gametag;
+    const friendTag = req.body.friendTag
+    
+    db.query('SELECT * FROM gamers WHERE gametag = $1',[friendTag],(err, results)=>{
+        if(results.rows==0){
+            res.status(400).json({message:'No user found'})
+        }else{
+            
+            db.query('UPDATE gamers SET friends = array_append(friends, $1) where gametag = $2',[friendTag,gametag],(err, results)=>{
+                if(err){
+                    console.log(err)
+                    res.status(400).json({message:'Query failed'})
+                }else{
+                    
+                    io.on('connection', (socket) => {
+                        console.log('a user connected');
+                        io.on("create-room", (roomId) => {
+                            console.log(`room ${roomId} was created`);
+                            socket.join(roomId);
+                
+                            socket.on('message', (message) => {
+                                console.log(message);
+                                io.to(roomId).emit('message',message);
+                              });
+                          });
+                
+                        socket.on('disconnect', () => {
+                          console.log('a user disconnected!');
+                        });
+                      });
+                    res.status(200).json({message:'Friend Added'});
+                }
+            })
+            
+        }
+
+        
+    });
+
+   
+
+}
+
+
+
 
 
 

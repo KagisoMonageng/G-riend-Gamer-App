@@ -34,17 +34,24 @@ export class AuthService {
     {
       this.isAuthenticated = true;
       this.token = token;
-      localStorage.setItem('key', this.token);
+      sessionStorage.setItem('key', this.token);
       
     }
     
+  }
+  getToken():string|any{
+    if(sessionStorage.getItem('key')!=null){
+      return JSON.stringify(sessionStorage.getItem('key'))
+    }else{
+      return null;
+    }
   }
 
   logout()
   {
       this.isAuthenticated = false;
       this.token = ''
-      localStorage.clear();
+      sessionStorage.clear();
 
   }
 

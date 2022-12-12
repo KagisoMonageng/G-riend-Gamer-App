@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.spinner.show()
-    if(localStorage.getItem('key')!=null)
+    if(sessionStorage.getItem('key')!=null)
     {
       this.toast.success({detail:"Welcome back", summary:"You are already logged in.",position:'tr',duration:2000})
       this.router.navigateByUrl('/home');
@@ -43,6 +43,7 @@ export class LoginComponent implements OnInit {
     this.spinner.show()
     this.authService.login(form.value).subscribe( async (data: any)=>{
       await this.authService.saveToken(data.token);
+      sessionStorage.setItem('loggedIn_gamer',form.value.gametag);
 
       setTimeout(() => {
         this.toast.success({detail:"Welcome back", summary:"You have successfully logged in.",position:'tr',duration:2000})

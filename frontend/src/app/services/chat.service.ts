@@ -1,40 +1,56 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
+import { Message } from '../interfaces/message';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
 
-  url = 'http://localhost:8080';
-  private socket !: Socket;
+  socket = io('http://localhost:3000');
+  
+  public message$ = new BehaviorSubject<Message>({
+
+    sender:'',
+    recipient:'',
+    text:'',
+    time: new Date().getTime()
+
+  })
 
   constructor() {
-    //this.socket = io(this.url)
+    
    }
 
-  public sendMessage(message: any) {
-    this.socket.emit('new-message', message);
+   public createRoom(roomNo: number)
+   {
+    this.socket.emit("create-room",roomNo)
+   }
+
+   public joinRoom(roomNo: number)
+   {
+    this.socket.emit('join-room',roomNo)
+   }
+
+   public leaveRoom(roomNo: number)
+   {
+    this.socket.emit('leave-room',roomNo)
+   }
+
+
+
+  public sendMessage(message: Message) {
+    this.socket.emit('message', message);
   }
 
-  joinRoom(data:any):void
-  {
-    this.socket.emit('join',data)
-  }
-
-  getNewMessage(): Observable <any>
-  {
-    return new Observable<{gamer:string,message: string}>(observer=>{
-      this.socket.on('new message',(data:any)=>{
-        observer.next(data)
-      });
-      return ()=>{
-        this.socket.disconnect();
-      }
-    })
-
-  }
+  public getNewMessage = () => {
+    this.socket.on('message', (message) =>{
+      this.message$.next(message);
+    });
+    
+    return this.message$.asObservable();
+  };
   
 
 
