@@ -35,11 +35,11 @@ export class EditProfileComponent implements OnInit {
     name:new FormControl('',[Validators.required,Validators.pattern('^[a-zA-Z ]*$')]),
     surname: new FormControl('',[Validators.required,Validators.pattern('^[a-zA-Z ]*$')]),
     confirmPassword: new FormControl(),
-    password: new FormControl()
+    password: new FormControl('',[Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{8,15}')])
 }
   );
 
-  cloudinaryUrl: string = 'https://api.cloudinary.com/v1_1/griend/image/upload';
+  cloudinaryUrl: string = 'https://api.cloudinary.com/v1_1/decomtmki/image/upload';
   file: any;
   isUpdating: boolean = false;
 
@@ -120,6 +120,8 @@ export class EditProfileComponent implements OnInit {
             this.authService.saveToken(data.token)
             this.ngOnInit();
             form.reset();
+            this.toast.success({detail:'Done!',summary:data.message,position:'tr',duration:2000}) 
+
             
             
           
@@ -140,7 +142,7 @@ export class EditProfileComponent implements OnInit {
     this.spinner.show();
     const formData = new FormData();    
     formData.append("file",this.file)    
-    formData.append("upload_preset","i8maua2c");     
+    formData.append("upload_preset","owbmceht");     
     this.http.post(this.cloudinaryUrl,formData).subscribe(async (res:any)=>{     
       this.image_link = await res.url;
       this.image.link = this.image_link;

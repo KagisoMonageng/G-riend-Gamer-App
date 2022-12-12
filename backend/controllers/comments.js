@@ -5,7 +5,7 @@ const db = new Client({
     host: 'localhost',  //Database host
     database: 'griend_db', //Database database
     password: 'admin12345', //Database password
-    port: 5432//Database port
+    port: 5433//Database port
   })
 
 
@@ -36,6 +36,7 @@ const db = new Client({
     const sql = 'Insert INTO comments (game_id,gametag,comment,date,hidden) VALUES ($1,$2,$3,$4,$5)'
     db.query(sql,[game_id,gametag,comment,date,false],(err, results)=>{
         if (err){
+            console.log(err)
             res.status(400).json({message:'Database connection error'});
         }else
         {

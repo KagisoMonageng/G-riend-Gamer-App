@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
     this.spinner.show()
     this.authService.login(form.value).subscribe( async (data: any)=>{
       await this.authService.saveToken(data.token);
-      sessionStorage.setItem('loggedIn_gamer',form.value.gametag);
+      sessionStorage.setItem('loggedIn_gamer',this.jwt.getData(data.token).gametag)
 
       setTimeout(() => {
         this.toast.success({detail:"Welcome back", summary:"You have successfully logged in.",position:'tr',duration:2000})

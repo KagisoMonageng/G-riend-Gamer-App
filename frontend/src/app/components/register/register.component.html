@@ -13,7 +13,11 @@
             <input type="text" formControlName="surname" placeholder="Last name" class="input w-64 input-sm max-w-xs input-box" minlength="2" required>
             <input type="email" formControlName="email" [email]="true"placeholder="Email" class="input w-64  input-sm max-w-xs input-box" required>
 
-            <input type="password" formControlName="password" placeholder="Password" class="input w-64  input-sm max-w-xs input-box" minlength="5" required>
+            <div class="tooltip w-full p-0 " data-tip="Minimum of Eight letters, At least Uppercase letter, At least One Lowecase letter, At least One number, At least One Special letter">
+                <input type="password" formControlName="password" placeholder="Password" class="input w-64  input-sm max-w-xs input-box" minlength="5" required>
+            </div>
+
+            
             <input type="password" formControlName="confirmPassword" placeholder="Re-type Password" class="input w-64  input-sm max-w-xs input-box" minlength="5" required>
 
             <div class="flex gap-2 w-64 mb-3">
@@ -24,7 +28,7 @@
                     <option value="Other">Other...</option>
 
                 </select>
-                <input type="date" formControlName="birthday" placeholder="Password" class="input flex-2 w-64 input-sm max-w-xs input-box" required>
+                <input type="date" value="2000-01-01" max="2009-12-31" formControlName="birthday" placeholder="Password" class="input flex-2 w-64 input-sm max-w-xs input-box" required>
 
             </div>
 
@@ -45,7 +49,7 @@
         </div>
     </div>
   </div>
-  <ngx-spinner bdColor="rgba(43, 80, 46, 0.8)" size = "default" color = "#fff" type = "square-jelly-box" [fullScreen] = "false"><p style="color: white" > Hang on ... </p></ngx-spinner>
+  <ngx-spinner bdColor="rgba(7, 6, 0 ,0.8)" size = "default" color = "#fff" type = "square-loader" [fullScreen] = "false"><p class="font-semibold -mt-14" style="color: white" > G- <span class="text-primary">riend </span> </p></ngx-spinner>
 
 
 

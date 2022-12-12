@@ -1,39 +1,30 @@
+<app-nav-bar></app-nav-bar>
 <div class="container mx-auto px-3 justify-center md:px-3 lg:px-3 ">
-    <div class="min-h-screen">
-        <app-nav-bar></app-nav-bar>
+    <div class="min-h-screen pt-24">
+        
 
-        <div class="mt-4 ">
-            <ul class="flex-col w-80 justify-center ml-auto mr-auto">
+        <div class="mt-2">
 
-                <input type="text"  (keyup)="$event.keyCode == 13" formControlName="message" placeholder="type message here" class="input max-w-lg input-box w-full mb-4" required>
 
-                <li class="bg-white bg-opacity-40 mb-5 h-14 rounded-xl p-2 " *ngFor="let gamer of gamers">
-                    <!-- chat 1 -->
-                    <!-- Click goes on here -->
-                   <a class="link-chat flex flex-row justify-between"> 
-                    <div class="flex gap-3 ">
-                        <img  class="rounded-full object-cover w-11 h-11" src="{{gamer.image}}" alt="">
-                        
-                        <div class="flex flex-col">
-                            <p class="text font-semibold">{{gamer.gametag}}</p>
-                            <p class="text font-light">New Message</p>
-                        </div>
-                    </div>
- 
-                     <div class="icon-div pr-4" (click)="addFriend(gamer.gametag)">
-                         <svg xmlns="http://www.w3.org/2000/svg"  class="w-7 h-7 icon mt-1" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8l-8 6l-8.054-2.685z"/></svg>
-                     </div>
-                   </a>
-                </li>
+            <div class="search-input mx-auto text-center my-3 relative ">
+                <input type="text" [(ngModel)]="term" (change)="textInput($event)" placeholder="Search a game" class="input w-full mx-auto input-md max-w-xs input-box placeholder:text-center " minlength="2" required>
+                <i class="fi fi-rr-search absolute opacity-50 top-3.5 right-10"></i>
 
-                
+            </div>
 
-            </ul>
+            <p class="text-sm my-3" *ngIf="term.length>0">Showing search results for : <span class="font-semibold">{{term}}</span> </p>
+            <div class="games-grid w-full grid grid-cols-4 gap-1 items-center content-center justify-around">
+                <div *ngFor="let game of games | filter:term" (click)="setGameID(game.game_id)"  class="flex flex-col text-center justify-center bg-secondary p-2 rounded-lg bg-opacity-20 cursor-pointer hover:bg-opacity-50 hover:shadow-md transition-all hover:scale-105 ">
+                    <img [src]="game.image" alt=""  class="w-16 h-16 rounded-lg object-cover mx-auto">
+                    <p class="text-center text-xs mx-auto my-1 content-center items-center game-name">{{game.name}}</p>
+                </div>
+            </div>
             
-          </div>
+            
+        </div>
           <script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
 
-          <ngx-spinner bdColor = "rgba(43, 80, 46, 0.8)" size = "default" color = "#fff" type = "square-jelly-box" [fullScreen] = "false"><p style="color: white" > Hang on ... </p></ngx-spinner>
+          <ngx-spinner bdColor="rgba(7, 6, 0 ,0.8)" size = "default" color = "#fff" type = "square-loader" [fullScreen] = "false"><p class="font-semibold -mt-14" style="color: white" > G- <span class="text-primary">riend </span> </p></ngx-spinner>
 
                 
         <!-- <div *ngFor="let message of messageList">

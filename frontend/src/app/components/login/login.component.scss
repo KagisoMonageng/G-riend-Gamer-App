@@ -83,7 +83,6 @@
 
 .input-box
 {
-    background-color: #8EA68C;
     color: white;
     width: 250px;
     height: 50px;
@@ -94,6 +93,43 @@
       }
     
    
+}
+
+.image-loader
+{
+    animation: bounce-top 3.2s ease 0s infinite normal none;
+}@keyframes bounce-top {
+			
+    0% {
+        transform:translateY(0);
+    }
+    25% {
+        transform:translateY(0);
+    }
+    40% {
+        transform:translateY(-24px);
+    }
+    55% {
+        transform:translateY(0);
+    }
+    65% {
+        transform:translateY(-12px);
+    }
+    75% {
+        transform:translateY(0);
+    }
+    82% {
+        transform:translateY(-6px);
+    }
+    87% {
+        transform:translateY(0);
+    }
+    93% {
+        transform:translateY(-4px);
+    }
+    100% {
+        transform:translateY(0);
+    }
 }
 
 .console-logo

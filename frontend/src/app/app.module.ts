@@ -22,6 +22,7 @@ import { ViewProfileComponent } from './components/view-profile/view-profile.com
 import { SearchComponent } from './components/search/search.component';
 import { ViewGameComponent } from './components/view-game/view-game.component';
 import { CommentsComponent } from './components/comments/comments.component';
+import { Ng2SearchPipe, Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { CommentsComponent } from './components/comments/comments.component';
     ReactiveFormsModule,
     NgxSpinnerModule,
     BrowserAnimationsModule,
-    NgToastModule
+    NgToastModule,
+    Ng2SearchPipeModule
     
   ],
   providers: [GamerGuard],

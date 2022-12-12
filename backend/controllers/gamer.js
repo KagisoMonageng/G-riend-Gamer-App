@@ -16,7 +16,7 @@ const db = new Client({
     host: 'localhost',  //Database host
     database: 'griend_db', //Database database
     password: 'admin12345', //Database password
-    port: 5432//Database port
+    port: 5433//Database port
   })
 
 

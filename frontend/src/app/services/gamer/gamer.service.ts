@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Comment } from 'src/app/interfaces/comment';
 import { Game } from 'src/app/interfaces/game';
 
 @Injectable({
@@ -58,7 +59,7 @@ export class GamerService {
 
   getComments(game_id:any) : Observable<Comment[]>
   {
-    return this.http.get<Comment[]>(this.url+'/getcomment/'+game_id);
+    return this.http.get<Comment[]>(this.url+'/getcomments/'+game_id);
   }
 
   addComment(game_id:any,data: Comment)
