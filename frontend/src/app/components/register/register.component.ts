@@ -53,7 +53,7 @@ export class RegisterComponent implements OnInit {
           await this.authService.saveToken(data.token);
 
           setTimeout(() => {
-            this.toast.success({detail:"Welcome!", summary:data.message,position:'tr',duration:2000})
+            //this.toast.success({detail:"Welcome!", summary:data.message,position:'tr',duration:2000})
             this.spinner.hide();
             this.router.navigateByUrl('/home');
           }, 5000);

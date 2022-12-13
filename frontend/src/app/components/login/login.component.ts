@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
       sessionStorage.setItem('loggedIn_gamer',this.jwt.getData(data.token).gametag)
 
       setTimeout(() => {
-        this.toast.success({detail:"Welcome back", summary:"You have successfully logged in.",position:'tr',duration:2000})
+        //this.toast.success({detail:"Welcome back", summary:"You have successfully logged in.",position:'tr',duration:2000})
       
         this.spinner.hide();
         this.router.navigateByUrl('/home');

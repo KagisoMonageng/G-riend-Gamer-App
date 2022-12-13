@@ -75,6 +75,14 @@ exports.register = async (req, res)=>{
                             res.status(400).json({message:db_err.message});
                         }else
                         {
+                            db.query('UPDATE gamers SET games = array_append(games, $1) where gametag = $2',[0,results.rows[0].gametag],(err, results)=>{
+                                if(err){
+                                    console.log(err)
+                                    res.status(400).json({message:'Query failed'})
+                                }else{
+                                    res.status(200).json({message:'Game added to favorites'})
+                                }
+                            })
                             const token = jwt.sign({
                                 gamer_id: results.rows[0].gamer_id,
                                 email: results.rows[0].email,
@@ -88,19 +96,19 @@ exports.register = async (req, res)=>{
                                 expiresIn: 120000000
                             });
 
-                            res.status(200).json({message: "Account successully registered",token: token,});
-                            // emailDetails.from = sender;
-                            // emailDetails.to = results.rows[0].email;
-                            // emailDetails.text = "Welcome! "+results.rows[0].name+'\n\nThis is your generated gametag \n'+results.rows[0].gametag +'\nUse it to sign in to your account along with your password. \n\nGriend\nYour Gamer Friend.';
-                            // emailDetails.subject = "Welcome to Griend";
+                            //res.status(200).json({message: "Account successully registered",token: token,});
+                            emailDetails.from = sender;
+                            emailDetails.to = results.rows[0].email;
+                            emailDetails.text = "Welcome! "+results.rows[0].name+'\n\nThis is your generated gametag \n'+results.rows[0].gametag +'\nUse it to sign in to your account along with your password. \n\nGriend\nYour Gamer Friend.';
+                            emailDetails.subject = "Welcome to Griend";
 
-                            // transporter.sendMail(emailDetails,(emailErr)=>{
-                            //     if(emailErr){
-                            //         res.status(400).json(emailErr.message);
-                            //     }else{
-                            //         res.status(200).json({message: "Account successully registered",token: token,});
-                            //     }
-                            // });
+                            transporter.sendMail(emailDetails,(emailErr)=>{
+                                if(emailErr){
+                                    res.status(400).json(emailErr.message);
+                                }else{
+                                    res.status(200).json({message: "Account successully registered",token: token,});
+                                }
+                            });
 
                         }   
             })
