@@ -21,8 +21,9 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.gamer.getGames().subscribe((games :any)=>{
+    this.gamer.getMyFavs(sessionStorage.getItem('loggedIn_gamer')).subscribe((games :any)=>{
       this.games = games;
+      console.log(games)
     },(err:HttpErrorResponse)=>{
 
     })

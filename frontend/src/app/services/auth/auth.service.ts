@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from "@auth0/angular-jwt";
+import { JwtService } from '../jwt/jwt.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class AuthService {
 
   jwtHelper = new JwtHelperService();
 
-  constructor(private http : HttpClient) { }
+  constructor(private http : HttpClient,private jwt : JwtService) { }
 
   register(data: any) {
     return this.http.post(this.url+'/register',data);
@@ -35,6 +36,7 @@ export class AuthService {
       this.isAuthenticated = true;
       this.token = token;
       sessionStorage.setItem('key', this.token);
+      sessionStorage.setItem('loggedIn_gamer',this.jwt.getData(token).gametag)
       
     }
     

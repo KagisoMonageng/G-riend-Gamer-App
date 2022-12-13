@@ -1,6 +1,6 @@
 const Client = require('pg').Pool;
 const jwt = require("jsonwebtoken");
-var nodemailer = require('nodemailer');
+
 
 const express = require('express');
 const app = express();
@@ -8,6 +8,8 @@ const socketServer = require('http').createServer(app);
 const io = require('socket.io')(socketServer, {
     cors: {origin : '*'}
   });
+
+var nodemailer = require('nodemailer');
 var smtpTransport = require('nodemailer-smtp-transport');
 const { randomInt } = require('crypto');
 

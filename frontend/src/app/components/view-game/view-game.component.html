@@ -19,8 +19,11 @@
 
                     <div class="main-images">
                         <img src="{{game.image}}" class="w-80 h-80 rounded-xl mx-auto object-cover" alt="">
-                    
-
+                
+                    </div>
+                    <div class="flex justify-between w-full">
+                        <span></span>
+                        <button type="button" class="btn btn-sm btn-secondary border-none bg-opacity-40 text-white mr-4" (click)="addToFavs(game.game_id)">Add to favorites &nbsp;<i class="fi fi-rr-heart"></i></button>
                     </div>
 
                     <div class="info">

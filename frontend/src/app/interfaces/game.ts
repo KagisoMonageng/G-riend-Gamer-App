@@ -1,4 +1,5 @@
 export interface Game{
+    game_id :any
     name:string
     publisher:string
     image:string

@@ -46,6 +46,10 @@ export class GamerService {
     return this.http.get(this.url+'/getGames/'+gametag);
 
   }
+  
+  addToFavs(game_id:any){
+    return this.http.patch(this.url+'/addToFavs/'+sessionStorage.getItem('loggedIn_gamer')+'/'+game_id,null);
+  }
 
   getGames(): Observable<Game[]>
   {
