@@ -115,8 +115,10 @@ export class EditProfileComponent implements OnInit {
         console.log(form.value)
         this.gamerServ.updateProfile(this.gametag, form.value).subscribe((data:any)=>{
             this.authService.saveToken(data.token)
-            this.ngOnInit();
             form.reset();
+            this.ngOnInit();
+            
+            
             this.toast.success({detail:'Done!',summary:data.message,position:'tr',duration:2000}) 
 
             

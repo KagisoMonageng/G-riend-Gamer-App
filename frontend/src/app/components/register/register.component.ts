@@ -50,7 +50,7 @@ export class RegisterComponent implements OnInit {
       this.spinner.show();
 
         this.authService.register(form.value).subscribe( async (data: any)=>{
-          await this.authService.saveToken(data.token);
+           this.authService.saveToken(data.token);
 
           setTimeout(() => {
             //this.toast.success({detail:"Welcome!", summary:data.message,position:'tr',duration:2000})

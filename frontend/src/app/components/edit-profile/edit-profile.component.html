@@ -56,7 +56,7 @@
                     <form action="" [formGroup]="updateForm" (ngSubmit)="onUpdate(updateForm)">
                         <input type="text" formControlName="name" placeholder="{{name}}" class= "input w-full input-bordered input-md max-w-xs input-box" minlength="2" required >
                         <input type="text" formControlName="surname" placeholder="{{surname}}" class="input input-bordered w-full input-md max-w-xs input-box" minlength="2" required>
-                        <div class="tooltip w-full p-0 -ml-1" data-tip="Minimum of Eight letters, At least Uppercase letter, At least One Lowecase letter, At least One number, At least One Special letter">
+                        <div class="tooltip w-full p-0 -ml-3" data-tip="Minimum of Eight letters, At least Uppercase letter, At least One Lowecase letter, At least One number, At least One Special letter">
                             <input type="password" formControlName="password" placeholder=" New Password" class="input w-full input-bordered input-md max-w-xs input-box" minlength="8" required>
                         </div>
 
