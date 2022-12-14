@@ -66,18 +66,7 @@ exports.register = async (req, res) => {
           if (db_err) {
             res.status(400).json({ message: db_err.message });
           } else {
-            db.query(
-              "UPDATE gamers SET games = array_append(games, $1) where gametag = $2",
-              [0, results.rows[0].gametag],
-              (err, results) => {
-                if (err) {
-                  console.log(err);
-                  res.status(400).json({ message: "Query failed" });
-                } else {
-                  res.status(200).json({ message: "Game added to favorites" });
-                }
-              }
-            );
+            
             const token = jwt.sign(
               {
                 gamer_id: results.rows[0].gamer_id,
@@ -105,14 +94,34 @@ exports.register = async (req, res) => {
               "\nUse it to sign in to your account along with your password. \n\nGriend\nYour Gamer Friend.";
             emailDetails.subject = "Welcome to Griend";
 
-            // transporter.sendMail(emailDetails, (emailErr) => {
-                res
-                  .status(200)
-                  .json({
-                    message: "Account successully registered",
-                    token: token,
-                  });
-            // });
+            transporter.sendMail(emailDetails, (emailErr) => {
+              if(emailErr)
+              {
+                res.status(400).json({
+                  message: "Error sending email"
+                })
+              }else{
+                res.status(200).json({
+                  message: "Account successully registered",
+                  token: token,
+                }); 
+              }
+            });
+
+            //initialize the array og games
+
+            db.query(
+              "UPDATE gamers SET games = array_append(games, $1) where gametag = $2",
+              [0, results.rows[0].gametag],
+              (err, results) => {
+                if (err) {
+                  console.log(err);
+                } else {
+                  console.log('game array initialized');
+                }
+              }
+            );
+
           }
         }
       );
@@ -155,12 +164,10 @@ exports.login = (req, res) => {
             }
           );
 
-          res
-            .status(200)
-            .json({
-              message: "Welcome! " + results.rows[0].name,
-              token: token,
-            });
+          res.status(200).json({
+            message: "Welcome! " + results.rows[0].name,
+            token: token,
+          });
         }
       }
     }
@@ -222,12 +229,10 @@ exports.forgotPassword = (req, res) => {
         if (emailErr) {
           res.status(400).json(emailErr);
         } else {
-          res
-            .status(200)
-            .json({
-              message:
-                "Your password has been sent to your to your email address",
-            });
+          res.status(200).json({
+            message:
+              "Your password has been sent to your to your email address",
+          });
         }
       });
     }
@@ -260,12 +265,10 @@ exports.updateImage = async (req, res) => {
             expiresIn: 120000000,
           }
         );
-        res
-          .status(200)
-          .json({
-            message: "Your profile picture was updated successfully",
-            token: token,
-          });
+        res.status(200).json({
+          message: "Your profile picture was updated successfully",
+          token: token,
+        });
       }
     }
   );
@@ -297,12 +300,10 @@ exports.updateGamer = async (req, res) => {
             expiresIn: 120000000,
           }
         );
-        res
-          .status(200)
-          .json({
-            message: "Your profile was updated successfully",
-            token: token,
-          });
+        res.status(200).json({
+          message: "Your profile was updated successfully",
+          token: token,
+        });
       }
     }
   );
