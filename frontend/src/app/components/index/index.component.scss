@@ -1,0 +1,36 @@
+.text
+{
+    font-size: 15px;
+    width: 180px;
+}
+.logo
+{
+    margin-bottom: -1.5rem;
+}
+.glow
+{
+    box-shadow: 0px 0px 8px #64DD5A;
+	border-radius: 15px;
+	text-transform: capitalize;
+	transition: 300ms;
+    
+    &:hover
+    {
+		transform: scale(1.05);
+
+    }
+    
+   
+}
+
+.controller
+{
+    margin-bottom: -1.5rem;
+    filter: drop-shadow(0px 8px 7px rgba(0, 0, 0, 0.207));
+}
+
+.console-logo
+{
+    filter: brightness(200%);
+    filter: ex(100%)
+}

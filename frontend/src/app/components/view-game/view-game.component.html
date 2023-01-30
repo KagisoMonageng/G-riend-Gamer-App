@@ -1,0 +1,120 @@
+<div class=" mx-auto justify-center ">
+    <div class="min-h-screen">
+       
+        <ngx-spinner bdColor="rgba(7, 6, 0 ,0.8)" size = "default" color = "#fff" type = "square-loader" [fullScreen] = "false"><p class="font-semibold -mt-14" style="color: white" > G- <span class="text-primary">riend </span> </p></ngx-spinner>
+
+        <div class="hero min-h-screen img " style="background-image: url({{game.image}}); background-size: cover;">
+            <div class="hero-overlay bg-opacity-10">
+                <div class="hero-content mt-20 px-4 text-left flex-col">
+
+                    <h1 class="font-bold text-lg">{{game.full_name}}</h1>
+                    <span class="text-xs font-light -mt-4">{{game.category}}</span>
+                    <!-- Console Icons -->
+                    <div class="flex gap-3 -mt-2">
+                        <span class="text-sm">Available on</span>  
+                        <img src="../../../assets/8547001_xbox_icon.png" class="w-6 h-6 invert" alt="">
+                        <img src="../../../assets/8547064_playstation_icon.png" class="w-6 h-6 invert" alt="">
+                        <img src="../../../assets/8666461_steam_icon.png" class="w-6 h-6 invert" alt="">
+                    </div>
+
+                    <div class="main-images">
+                        <img src="{{game.image}}" class="w-80 h-80 shadow-xl rounded-xl mx-auto object-cover" alt="">
+                
+                    </div>
+                    <div class="flex justify-between w-full">
+                        <span></span>
+                        <button type="button" class="btn btn-sm btn-secondary border-none bg-opacity-40 text-white mr-4" (click)="addToFavs(game.game_id)">Add to favorites &nbsp;<i class="fi fi-rr-heart"></i></button>
+                    </div>
+
+                    <div class="info">
+                        <span class="text-md font-semibold mb-2">About the game</span>
+                        <p class="desc">
+                            {{game.description}}
+                        </p>
+                        <p class="flex gap-2 content-center my-2">
+                            <a href="{{game.url}}" class="link font-semibold no-underline">Visit Website </a><i class="fi fi-rr-world my-auto"></i>
+                        </p>
+                        
+                    </div>
+
+
+
+                    <div class="comments">
+                        <span class="text-md font-semibold mb-2">Comments</span>
+                        <div class="w-full px-0"> 
+
+                            <div *ngIf="comments.length==0 && !isCommenting">
+                                <div class="hero">
+                                    <div class="hero-content text-center">
+                                      <div class="max-w-md">
+                                        <h1 class="text-lg font-bold">No Comments</h1>
+                                        <p class="py-1">There are no new comments</p>
+                                        <button class="btn btn-primary btn-sm" (click)="toggleAdd()">Add Comment</button>
+                                      </div>
+                                    </div>
+                                  </div>
+                            </div>
+
+                            <!-- Here -->
+                            <div class="comment my-4 transition-all flex justify-between " *ngFor="let comment of comments">
+                                
+                                <div class="flex content-center justify-start gap-2">
+                                    <div class="image">
+                                        <img [src]="comment.image" class="w-12 h-12 rounded-full object-cover" alt="">
+                                        
+                                    </div>
+                                    <div class="comment-text my-auto">
+                                        <h3 class="text-xs font-semibold">{{comment.gametag}}</h3>
+                                        <p class="text-sm comment-text w-52">{{comment.comment}}</p>
+                                    </div>
+                                </div>
+
+                                <div class="options" *ngIf="comment.gametag == gametag">
+                                    <div class="dropdown dropdown-top dropdown-end">
+                                        <label tabindex="0" class="btn m-1 btn-ghost bg-opacity-80 rounded-full"><i class="fi fi-rr-menu-dots-vertical"></i></label>
+                                        <ul tabindex="0" class="dropdown-content flex flex-col gap-2 p-3 shadow bg-base-100  bg-opacity-80 rounded-full">
+                                          <li class="rounded-full hover:bg-base-100 px-3 py-2" (click)="editComment(comment.comment_id,comment.comment)"><a><i class="fi fi-rr-pencil m-auto"></i></a></li>
+                                          <li class="rounded-full hover:bg-base-100 px-3 py-2" (click)="deleteComment(comment.comment_id)"><a><i class="fi fi-rr-trash m-auto"></i></a></li>
+                                        </ul>
+                                      </div>
+                                </div>
+                                
+                            </div>
+
+                            <div *ngIf="comments.length > 0 || isCommenting">
+
+                                <form [formGroup]="commentForm" (ngSubmit)="addComment(commentForm)">
+                                    <div class="flex w-full p-3 gap-2" >
+                                        <input type="text" formControlName="comment" placeholder="type comment here" class="input flex-1 input-ghost" required>
+                                        <div class="icon-div ">
+                                            <button type="submit" class="btn btn-ghost bg-base-100 rounded-lg bg-opacity-20 hover:bg-opacity-60 px-4"><i class="fi fi-rr-comment"></i></button>
+                                        </div>
+                                    </div>
+                                </form>
+
+
+
+
+                            </div>
+
+
+                            
+                            
+
+                        </div>
+
+
+
+                        
+                    </div>
+
+                </div>
+            </div>
+
+           
+        </div>
+        
+        
+        <app-nav-bar class="z-40"></app-nav-bar>
+    </div>
+</div>

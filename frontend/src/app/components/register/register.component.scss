@@ -1,0 +1,111 @@
+.slogan
+{
+    font-size: 10px;
+}
+.hero-content
+{
+    margin-top: 1rem;
+}
+.text
+{
+    font-size: 15px;
+    width: 180px;
+}
+.logo
+{
+    margin-bottom: -1.8rem;
+    margin-top: -3rem;
+}
+.glow
+{
+    box-shadow: 0px 0px 8px #64DD5A;
+    border-radius: 15px;
+    text-transform: capitalize;
+    
+    &:hover
+    {
+        transition: 300ms;
+    
+        &:hover
+        {
+            transform: scale(1.05);
+    
+        }
+    }
+
+    &:disabled
+    {
+        box-shadow: 0px 0px 0px transparent;
+        color: rgb(202, 202, 202);
+        background-color: #0000003b;
+    }
+
+    &:enabled
+    {
+        animation: bounce-top 1.5s ease 0s 1 normal none;
+    }@keyframes bounce-top {
+			
+		0% {
+			transform:translateY(0);
+		}
+		25% {
+			transform:translateY(0);
+		}
+		40% {
+			transform:translateY(-24px);
+		}
+		55% {
+			transform:translateY(0);
+		}
+		65% {
+			transform:translateY(-12px);
+		}
+		75% {
+			transform:translateY(0);
+		}
+		82% {
+			transform:translateY(-6px);
+		}
+		87% {
+			transform:translateY(0);
+		}
+		93% {
+			transform:translateY(-4px);
+		}
+		100% {
+			transform:translateY(0);
+		}
+	}
+
+}
+
+.input-box
+{
+    // background-color: #8EA68C;
+    color: white;
+    border-radius: 9px;
+    margin: .3rem 0;
+    height: 2.5rem;
+    &::placeholder { 
+        color: rgba(248, 248, 248, 0.918);
+        font-weight: 200;
+        font-size: 12px;
+      }
+}
+
+.console-logo
+{
+    filter: brightness(200%);
+    filter: ex(100%)
+}
+.form-control .text
+{
+    font-size: 10px;
+    align-items: center;
+   
+}
+.sign-up
+{
+    font-size: 15px;
+    width: 199px;
+}
