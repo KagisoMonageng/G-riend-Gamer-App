@@ -10,7 +10,7 @@ export class AuthService {
   isAuthenticated : boolean = false;
   token : string = '';
 
-  url = 'http://localhost:8080';
+  url = 'http://localhost:8080/account';
 
   jwtHelper = new JwtHelperService();
 
@@ -22,24 +22,36 @@ export class AuthService {
 
   login(data: any) {
     return this.http.post(this.url+'/login',data);
-  } 
+  }
 
   forgotPassword(data: any) {
     return this.http.post(this.url+'/forgotPassword',data);
   }
 
+  updateProfile(gametag:any ,form:any)
+  {
+    return this.http.patch(this.url+'/update/'+gametag,form);
+
+  }
+
+  updateProfilePicture(gametag:any,link:any)
+  {
+    return this.http.patch(this.url+'/updateProfilePicture/'+gametag, link);
+
+  }
+
   saveToken(token : string): void
   {
-    
+
     if(token!= null)
     {
       this.isAuthenticated = true;
       this.token = token;
       sessionStorage.setItem('key', this.token);
       sessionStorage.setItem('loggedIn_gamer',this.jwt.getData(token).gametag)
-      
+
     }
-    
+
   }
   getToken():string|any{
     if(sessionStorage.getItem('key')!=null){

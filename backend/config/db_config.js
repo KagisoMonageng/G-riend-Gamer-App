@@ -1,10 +1,13 @@
-const Pool = require("pg").Pool;
-const db = new Pool({
-  user: "admin", //Database username
-  host: "localhost", //Database host
-  database: "griend_db", //Database database
-  password: "admin12345", //Database password
-  port: 5432, //Database port
-});
+const pg = require('pg')
+const db = new pg.Client('postgres://oniuhcik:HVzf57D5a6DVllfAfv1UMAZBvL_0N9oa@hattie.db.elephantsql.com/oniuhcik');;
+db.connect(function(err){
+  if (err) {
+    console.log("Database connection error");
+    console.log(err)
+  }else
+  {
+    console.log("Database connected successfully");
+  }
+})
 
 module.exports = db;

@@ -1,6 +1,4 @@
-const Client = require("pg").Pool;
 const jwt = require("jsonwebtoken");
-
 const express = require("express");
 const app = express();
 const socketServer = require("http").createServer(app);
@@ -11,14 +9,6 @@ const io = require("socket.io")(socketServer, {
 var nodemailer = require("nodemailer");
 var smtpTransport = require("nodemailer-smtp-transport");
 const { randomInt } = require("crypto");
-
-// const db = new Client({
-//     user: 'admin',  //Database username
-//     host: 'localhost',  //Database host
-//     database: 'griend_db', //Database database
-//     password: 'admin12345', //Database password
-//     port: 5433//Database port
-//   })
 
 const db = require("../config/db_config");
 
@@ -37,13 +27,6 @@ emailDetails = {
   to: "", //where the email is to
   subject: "", //email subject
   text: "", //email
-};
-
-messageData = {
-  message: "",
-  sender: "",
-  reciepient: "",
-  time: "",
 };
 
 const image =
@@ -103,7 +86,7 @@ exports.register = async (req, res) => {
               }else{
                 res.status(200).json({
                   message: "Account successully registered",
-                  token: token,
+                  token: token
                 }); 
               }
             });

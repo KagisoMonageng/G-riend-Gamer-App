@@ -9,21 +9,10 @@ import { Game } from 'src/app/interfaces/game';
 })
 export class GamerService {
 
-  url = 'http://localhost:8080';
+  url = 'http://localhost:8080/games';
 
   constructor(private http:HttpClient) { }
 
-  updateProfile(gametag:any ,form:any)
-  {
-    return this.http.patch(this.url+'/update/'+gametag,form);
-
-  }
-
-  updateProfilePicture(gametag:any,link:any)
-  {
-    return this.http.patch(this.url+'/updateProfilePicture/'+gametag, link);
-
-  }
 
   getGamers(gametag:string): Observable<any>
   {
@@ -46,7 +35,7 @@ export class GamerService {
     return this.http.get<any[]>(this.url+'/getGames/'+gametag);
 
   }
-  
+
   addToFavs(game_id:any){
     return this.http.patch(this.url+'/addToFavs/'+sessionStorage.getItem('loggedIn_gamer')+'/'+game_id,null);
   }
@@ -81,14 +70,6 @@ export class GamerService {
     return this.http.patch(this.url+'/delete-comment/'+comment_id,data);
   }
 
-  
 
-//router.get('/getComments/:game_id',comments.getComments)
-
-// router.post('/comment/:game_id/:gametag',comments.addComment)
-
-// router.patch('/comment/:comment_id',comments.editComment)
-
-// router.patch('/delete-comment/:comment_id',comments.deleteComment)
 
 }

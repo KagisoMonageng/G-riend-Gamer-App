@@ -44,12 +44,12 @@ export class EditProfileComponent implements OnInit {
   isUpdating: boolean = false;
 
   image = {
-    link : '' 
+    link : ''
   }
 
   editDetails: boolean = false;
 
-  constructor(private gamerServ : GamerService,private toast : NgToastService,private jwt:JwtService,private spinner:NgxSpinnerService, private http:HttpClient,private authService: AuthService, private router: Router) { }
+  constructor(private gamerServ : GamerService,private account : AuthService,private toast : NgToastService,private jwt:JwtService,private spinner:NgxSpinnerService, private http:HttpClient, private router: Router) { }
 
   ngOnInit(): void {
     this.spinner.show();
@@ -60,14 +60,14 @@ export class EditProfileComponent implements OnInit {
     this.image_link = this.jwt.getData(JSON.stringify(sessionStorage.getItem('key'))).image;
 
     this.gamerServ.getMyFavs(this.gametag).subscribe((data:any)=>{
-      
+
       this.game_ids = data;
-      
+
       for (let index = 0; index < this.game_ids.length; index++) {
         this.gamerServ.getOneGame(this.game_ids[index]).subscribe((game:any)=>{
           this.games.push(game);
         })
-    
+
       }
 
     })
@@ -86,7 +86,7 @@ export class EditProfileComponent implements OnInit {
     {
       this.file =  event.target.files[0];
       this.spinner.hide();
-     
+
     }
 
   }
@@ -113,49 +113,49 @@ export class EditProfileComponent implements OnInit {
       if(form.value.confirmPassword == form.value.password)
       {
         console.log(form.value)
-        this.gamerServ.updateProfile(this.gametag, form.value).subscribe((data:any)=>{
-            this.authService.saveToken(data.token)
+        this.account.updateProfile(this.gametag, form.value).subscribe((data:any)=>{
+            this.account.saveToken(data.token)
             form.reset();
             this.ngOnInit();
-            
-            
-            this.toast.success({detail:'Done!',summary:data.message,position:'tr',duration:2000}) 
 
-            
-            
-          
+
+            this.toast.success({detail:'Done!',summary:data.message,position:'tr',duration:2000})
+
+
+
+
         },(err:HttpErrorResponse)=>{
-          this.toast.error({detail:'Sorry!',summary:err.error.message,position:'tr',duration:2000}) 
+          this.toast.error({detail:'Sorry!',summary:err.error.message,position:'tr',duration:2000})
         })
 
       }else{
         this.toast.warning({detail:'Ooops!',summary:'Passwords do not match',position:'tr',duration:2000})
-       
+
       }
-    } 
+    }
   }
 
 
-  onSubmit(){  
-    
+  onSubmit(){
+
     this.spinner.show();
-    const formData = new FormData();    
-    formData.append("file",this.file)    
-    formData.append("upload_preset","owbmceht");     
-    this.http.post(this.cloudinaryUrl,formData).subscribe(async (res:any)=>{     
+    const formData = new FormData();
+    formData.append("file",this.file)
+    formData.append("upload_preset","owbmceht");
+    this.http.post(this.cloudinaryUrl,formData).subscribe(async (res:any)=>{
       this.image_link = await res.url;
       this.image.link = this.image_link;
-      
-      this.gamerServ.updateProfilePicture(this.gametag,this.image).subscribe((saveData:any)=>{
-        this.authService.saveToken(saveData.token);
+
+      this.account.updateProfilePicture(this.gametag,this.image).subscribe((saveData:any)=>{
+        this.account.saveToken(saveData.token);
         sessionStorage.setItem('image_link',this.image_link);
 
         this.spinner.hide();
-       
+
       })
-     
-    }) 
-   
+
+    })
+
   }
 
 
