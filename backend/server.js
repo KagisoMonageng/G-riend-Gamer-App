@@ -15,6 +15,12 @@ const port = 8080;
 
 app.use(express.json());
 app.use(cors(corsOptions));
+
+
+app.get('/', (req, res) => {
+  res.send('Hey this is my API running 🥳')
+})
+
 app.use("/account", account);
 app.use("/games", games);
 
