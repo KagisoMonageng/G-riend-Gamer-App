@@ -5,7 +5,7 @@ const app = express();
 
 
 var corsOptions = {
-  origin: "*",
+  origin: "https://g-riend-gamer-app-tye2.vercel.app/",
 };
 
 const account = require("./routes/account");
