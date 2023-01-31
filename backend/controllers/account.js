@@ -114,7 +114,7 @@ exports.register = async (req, res) => {
   });
 };
 
-exports.login = (req, res) => {
+exports.login = async (req, res) =>  {
   const { cred, password } = req.body;
   const sql = "SELECT * FROM gamers WHERE email = $1 OR gametag = $1";
   db.query(sql, [cred], (err, results) => {
