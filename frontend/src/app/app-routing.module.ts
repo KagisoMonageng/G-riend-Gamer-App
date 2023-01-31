@@ -14,11 +14,11 @@ const routes: Routes = [
   {path: '', component:IndexComponent},
   {path:'login', component:LoginComponent},
   {path:'register', component:RegisterComponent},
-  {path:'home', component:HomeComponent,canActivate: [GamerGuard]},
+  {path:'home', component:HomeComponent},
   {path:'profile', component:EditProfileComponent,canActivate: [GamerGuard]},
   {path:'view-profile', component:ViewProfileComponent,canActivate: [GamerGuard]},
-  {path:'search', component:SearchComponent,canActivate: [GamerGuard]},
-  {path:'view-game', component:ViewGameComponent,canActivate: [GamerGuard]},
+  {path:'search', component:SearchComponent},
+  {path:'view-game', component:ViewGameComponent},
 
 
 
