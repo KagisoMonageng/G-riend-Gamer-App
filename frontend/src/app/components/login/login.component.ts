@@ -47,17 +47,18 @@ export class LoginComponent implements OnInit {
 
       setTimeout(() => {
         //this.toast.success({detail:"Welcome back", summary:"You have successfully logged in.",position:'tr',duration:2000})
-      
+
         this.spinner.hide();
         this.router.navigateByUrl('/home');
       }, 3000);
-     
+
 
     },(error:HttpErrorResponse)=>{
+      console.log(error)
       this.toast.error({detail:"Sorry!", summary:error.error.message,position:'tr',duration:2000})
       setTimeout(() => {
         this.spinner.hide();
-        
+
       }, 3000);
     });
 
@@ -69,11 +70,11 @@ export class LoginComponent implements OnInit {
     this.authService.forgotPassword(form.value).subscribe((data: any)=>{
       setTimeout(() => {
         this.toast.success({detail:"Good News!", summary:'Credentials sent to your email',position:'tr',duration:3000})
-      
+
         this.spinner.hide();
         this.router.navigateByUrl('');
       }, 1000);
-     
+
 
     },(error:HttpErrorResponse)=>{
       form.reset()

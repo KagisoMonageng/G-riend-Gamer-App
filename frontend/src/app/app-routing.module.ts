@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ChatComponent } from './components/chat/chat.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { HomeComponent } from './components/home/home.component';
 import { IndexComponent } from './components/index/index.component';
@@ -16,7 +15,6 @@ const routes: Routes = [
   {path:'login', component:LoginComponent},
   {path:'register', component:RegisterComponent},
   {path:'home', component:HomeComponent,canActivate: [GamerGuard]},
-  {path:'chat', component:ChatComponent,canActivate: [GamerGuard]},
   {path:'profile', component:EditProfileComponent,canActivate: [GamerGuard]},
   {path:'view-profile', component:ViewProfileComponent,canActivate: [GamerGuard]},
   {path:'search', component:SearchComponent,canActivate: [GamerGuard]},

@@ -10,7 +10,7 @@ export class AuthService {
   isAuthenticated : boolean = false;
   token : string = '';
 
-  url = 'https://g-riend-gamer-app-api.vercel.app/account';
+  url = 'g-riend-gamer-app-api.vercel.app/account';
 
   jwtHelper = new JwtHelperService();
 

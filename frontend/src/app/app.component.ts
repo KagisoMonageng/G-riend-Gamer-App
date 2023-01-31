@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ChatService } from './services/chat.service';
 
 @Component({
   selector: 'app-root',
@@ -11,14 +10,14 @@ export class AppComponent {
   newMessage:any;
   messageList: string[] = [];
 
-  constructor(private chatService: ChatService){
+  constructor(){
 
   }
 
   ngOnInit(){}
-  
 
 
- 
+
+
   title = 'frontend';
 }

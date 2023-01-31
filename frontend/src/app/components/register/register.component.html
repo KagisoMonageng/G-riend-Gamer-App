@@ -1,4 +1,4 @@
-<div class=" mx-auto px-2 md:px-3 lg:px-3">  
+<div class=" mx-auto px-2 md:px-3 lg:px-3">
     <div class="hero min-h-screen md:w-8/12">
         <div class="hero-content text-center">
           <div class="max-w-lg mr-auto ml-auto">
@@ -17,12 +17,12 @@
                 <input type="password" formControlName="password" placeholder="Password" class="input w-64  input-sm max-w-xs input-box" minlength="5" required>
             </div>
 
-            
+
             <input type="password" formControlName="confirmPassword" placeholder="Re-type Password" class="input w-64  input-sm max-w-xs input-box" minlength="5" required>
 
             <div class="flex gap-2 w-64 mb-3">
                 <select class="select select-sm max-w-xs input-box flex-1" formControlName="gender" id="">
-                    
+
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                     <option value="Other">Other...</option>
@@ -36,20 +36,20 @@
             <div class="form-control">
                 <label class="cursor-pointer label flex justify-start gap-3">
                 <input type="checkbox" class="toggle toggle-xs" formControlName="tsNcs" required/>
-                <span class="font-thin text-left text">I accept the terms and conditions of this app</span> 
+                <span class="font-thin text-left text">I accept the terms and conditions of this app</span>
                 </label>
             </div>
 
-            
+
             <button type="submit" class="btn btn-primary w-60 mb-2 mr-auto ml-auto text-white glow" [disabled]="registerForm.invalid">Sign Up</button>
-            </form>   
-            
+            </form>
+
             <p class="py-1 mb-0 text-white text mr-auto ml-auto sign-up">Already have an account?<span class="font-bold"><a routerLink="/login">Sign In</a> </span></p>
 
         </div>
     </div>
   </div>
-  <ngx-spinner bdColor="rgba(7, 6, 0 ,0.8)" size = "default" color = "#fff" type = "square-loader" [fullScreen] = "false"><p class="font-semibold -mt-14" style="color: white" > G- <span class="text-primary">riend </span> </p></ngx-spinner>
+  <ngx-spinner bdColor="rgba(7, 6, 0 ,0.8)" size = "default" color = "#fff" type = "square-loader" [fullScreen] = "false"><p class="font-semibold -mt-7" style="color: white" > G- <span class="text-primary">riend </span> </p></ngx-spinner>
 
 
 

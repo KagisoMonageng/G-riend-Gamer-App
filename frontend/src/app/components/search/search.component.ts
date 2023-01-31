@@ -2,7 +2,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { ChatService } from 'src/app/services/chat.service';
 import { GamerService } from 'src/app/services/gamer/gamer.service';
 import { JwtService } from 'src/app/services/jwt/jwt.service';
 
@@ -37,7 +36,7 @@ export class SearchComponent implements OnInit {
   }
 
   textInput(e :any){
-    
+
   }
 
 
@@ -58,7 +57,7 @@ export class SearchComponent implements OnInit {
   //     console.log(gamers)
 
   //   })
-    
+
   // }
 
   // addFriend(gametag:string)
@@ -68,7 +67,7 @@ export class SearchComponent implements OnInit {
   //   this.gamer.addFriend(gametag).subscribe((response:any)=>{
 
   //     console.log(response)
-     
+
 
   //   },(err:HttpErrorResponse)=>{
   //     console.log(err)

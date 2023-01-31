@@ -1,7 +1,7 @@
 <app-nav-bar></app-nav-bar>
 <div class="container mx-auto px-3 justify-center md:px-3 lg:px-3 ">
     <div class="min-h-screen pt-32">
-       
+
 
         <!-- profile part -->
             <div class="flex flex-col justify-center ml-auto mr-auto w-full gap-3">
@@ -35,12 +35,12 @@
 
                 <div id="edit-picure" [hidden]="editDetails" >
                     <h3 class="font-bold text-lg">Profile Picture</h3>
-                    
-    
+
+
                         <p class="py-2">Select a new picture</p>
                         <form action="" [formGroup]="update_dp" (ngSubmit)="onSubmit()" >
                             <input type="file" formControlName = 'file' class="file-input file-input-ghost file-input-md w-full max-w-xs" (change)="onFileChange($event)" required>
-    
+
                             <div class="modal-action">
                             <label for="my-modal-6" class="btn  text-white">Cancel</label>
                             <button type="submit" class="btn btn-primary text-white glow-1" >Send</button>
@@ -60,7 +60,7 @@
                             <input type="password" formControlName="password" placeholder=" New Password" class="input w-full input-bordered input-md max-w-xs input-box" minlength="8" required>
                         </div>
 
-                        
+
                         <input type="password" formControlName="confirmPassword" placeholder="Re-type Password" class="input w-full input-bordered input-md max-w-xs input-box" minlength="5" required>
 
                         <div class="modal-action">
@@ -71,9 +71,9 @@
 
 
                 </div>
-                    
 
-                
+
+
 
 
             </div>
@@ -95,13 +95,13 @@
         </div>
 
 
-        
-        
-        
 
-        
 
-        <ngx-spinner bdColor="rgba(7, 6, 0 ,0.8)" size = "default" color = "#fff" type = "square-loader" [fullScreen] = "false"><p class="font-semibold -mt-14" style="color: white" > G- <span class="text-primary">riend </span> </p></ngx-spinner>
+
+
+
+
+        <ngx-spinner bdColor="rgba(7, 6, 0 ,0.8)" size = "default" color = "#fff" type = "square-loader" [fullScreen] = "false"><p class="font-semibold -mt-7" style="color: white" > G- <span class="text-primary">riend </span> </p></ngx-spinner>
 
     </div>
 </div>

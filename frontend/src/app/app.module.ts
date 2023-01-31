@@ -15,7 +15,6 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {NgToastModule}from 'ng-angular-popup';
-import { ChatComponent } from './components/chat/chat.component'
 import { io, Socket } from 'socket.io-client';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { ViewProfileComponent } from './components/view-profile/view-profile.component';
@@ -32,7 +31,6 @@ import { Ng2SearchPipe, Ng2SearchPipeModule } from 'ng2-search-filter';
     RegisterComponent,
     HomeComponent,
     NavBarComponent,
-    ChatComponent,
     EditProfileComponent,
     ViewProfileComponent,
     SearchComponent,
@@ -50,7 +48,7 @@ import { Ng2SearchPipe, Ng2SearchPipeModule } from 'ng2-search-filter';
     BrowserAnimationsModule,
     NgToastModule,
     Ng2SearchPipeModule
-    
+
   ],
   providers: [GamerGuard],
   bootstrap: [AppComponent]

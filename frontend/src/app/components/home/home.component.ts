@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { async } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { ChatService } from 'src/app/services/chat.service';
 import { GamerService } from 'src/app/services/gamer/gamer.service';
 import { JwtService } from 'src/app/services/jwt/jwt.service';
 
@@ -13,7 +12,7 @@ import { JwtService } from 'src/app/services/jwt/jwt.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  
+
   selectedGamersDetails: any;
   games: any = [];
 
@@ -37,7 +36,7 @@ export class HomeComponent implements OnInit {
     this.router.navigateByUrl('/view-game')
   }
 
-  
-  
+
+
 
 }
