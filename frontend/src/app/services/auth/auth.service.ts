@@ -28,17 +28,19 @@ export class AuthService {
     return this.http.post(this.url+'/forgotPassword',data);
   }
 
-  updateProfile(gametag:any ,form:any)
+  updateProfilePicture(gametag:any,image:any)
   {
-    return this.http.patch(this.url+'/update/'+gametag,form);
+    return this.http.post(this.url+'/updateProfileImage/'+gametag,image);
 
   }
 
-  updateProfilePicture(gametag:any,link:any)
+  updateProfile(gametag:any,data:any)
   {
-    return this.http.patch(this.url+'/updateProfilePicture/'+gametag, link);
+    return this.http.post(this.url+'/updateProfile/'+gametag,data);
 
   }
+
+
 
   saveToken(token : string): void
   {
