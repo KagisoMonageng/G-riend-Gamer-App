@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
   login(form : FormGroup)
   {
     this.spinner.show()
-    this.http.post('https://g-riend-gamer-app-e6y3ar47c-kagisomonageng.vercel.app/account/login',form.value).subscribe( async (data: any)=>{
+    this.http.post('https://g-riend-gamer-app-api.vercel.app/account/login',form.value).subscribe( async (data: any)=>{
 
 
       await this.authService.saveToken(data.token);
