@@ -59,10 +59,10 @@ exports.register = async (req, res) => {
                 surname: results.rows[0].surname,
                 image: results.rows[0].image,
               },
-              process.env.SECRET_KEY,
+              'iwgiuwfbocw cwo78wc7tcuwiob73obfcwiygcwyicb',
               {
                 algorithm: "HS256",
-                expiresIn: 120000000,
+                expiresIn: '24h',
               }
             );
 
@@ -140,10 +140,10 @@ exports.login = async (req, res) =>  {
               surname: results.rows[0].surname,
               image: results.rows[0].image,
             },
-            process.env.SECRET_KEY,
+            'sfnbowsnbfwnvksnpkvnsivosiopv8t6w8gvownbvop',
             {
               algorithm: "HS256",
-              expiresIn: 120000000,
+              expiresIn: '24h',
             }
           );
 
