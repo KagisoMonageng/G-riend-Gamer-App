@@ -1,4 +1,4 @@
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -26,7 +26,7 @@ export class RegisterComponent implements OnInit {
   });
 
 
-  constructor(private router : Router,private authService: AuthService,private jwt : JwtService,private toast : NgToastService, private spinner : NgxSpinnerService) { }
+  constructor(private router : Router,private authService: AuthService,private jwt : JwtService,private toast : NgToastService, private spinner : NgxSpinnerService,private http : HttpClient) { }
 
   ngOnInit(): void {
     this.spinner.show()
@@ -37,19 +37,19 @@ export class RegisterComponent implements OnInit {
     }
 
     setTimeout(() => {
-      
+
       this.spinner.hide();
     }, 2000);
   }
 
   register(form:FormGroup)
   {
-    
+
     if(form.value.password == form.value.confirmPassword)
     {
       this.spinner.show();
 
-        this.authService.register(form.value).subscribe( async (data: any)=>{
+        this.http.post('https://g-riend-gamer-app-api.vercel.app/account/register',form.value).subscribe( async (data: any)=>{
           this.authService.saveToken(data.token);
           console.log(data)
 
@@ -58,7 +58,7 @@ export class RegisterComponent implements OnInit {
             this.spinner.hide();
             this.router.navigateByUrl('/home');
           }, 5000);
-          
+
 
         },(error:HttpErrorResponse)=>{
           this.spinner.hide();
@@ -72,7 +72,7 @@ export class RegisterComponent implements OnInit {
 
     }
 
-    
+
 
 
 
