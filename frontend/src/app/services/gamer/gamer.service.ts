@@ -9,7 +9,7 @@ import { Game } from 'src/app/interfaces/game';
 })
 export class GamerService {
 
-  url = 'g-riend-gamer-app-api.vercel.app/games';
+  url = 'https://g-riend-gamer-app-api.vercel.app/games';
 
   constructor(private http:HttpClient) { }
 
