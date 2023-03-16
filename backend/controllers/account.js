@@ -27,6 +27,12 @@ emailDetails = {
   to: "", //where the email is to
   subject: "", //email subject
   text: "", //email
+  attachment:[
+    {   
+      filename: 'text1.pdf',
+      content: '<h1 style = "color:#333333">hello world!</h1>'
+  }
+  ]
 };
 
 const image =
