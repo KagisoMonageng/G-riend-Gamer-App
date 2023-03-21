@@ -49,7 +49,7 @@ export class RegisterComponent implements OnInit {
     {
       this.spinner.show();
 
-        this.http.post('https://g-riend-gamer-app-api.vercel.app/account/register',form.value).subscribe( async (data: any)=>{
+        this.authService.register(form.value).subscribe( async (data: any)=>{
           this.authService.saveToken(data.token);
           console.log(data)
 

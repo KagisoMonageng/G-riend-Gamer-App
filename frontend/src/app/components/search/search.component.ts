@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { GamerService } from 'src/app/services/gamer/gamer.service';
 import { JwtService } from 'src/app/services/jwt/jwt.service';
@@ -16,12 +17,18 @@ export class SearchComponent implements OnInit {
   games: any = [];
   term:string = ''
 
-  constructor(private jwt : JwtService,private auth : AuthService,private gamer : GamerService,private router:Router) {}
+  constructor(private spinner : NgxSpinnerService,private jwt : JwtService,private auth : AuthService,private gamer : GamerService,private router:Router) {}
 
   ngOnInit(): void {
+    this.spinner.show();
+
 
     this.gamer.getGames().subscribe((games :any)=>{
       this.games = games;
+      setTimeout(() => {
+        /* spinner ends after 2 seconds */
+        this.spinner.hide();
+      }, 500);
     },(err:HttpErrorResponse)=>{
 
     })

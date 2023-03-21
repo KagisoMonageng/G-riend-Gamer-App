@@ -1,29 +1,11 @@
 const jwt = require("jsonwebtoken");
-const express = require("express");
-const app = express();
-const socketServer = require("http").createServer(app);
-const io = require("socket.io")(socketServer, {
-  cors: { origin: "*" },
-});
-
-var nodemailer = require("nodemailer");
-var smtpTransport = require("nodemailer-smtp-transport");
-const { randomInt } = require("crypto");
-
+const transporter = require("../config/email.config")
 const db = require("../config/db_config");
 
-const sender = "griendgamer@outlook.com";
-
-var transporter = nodemailer.createTransport({
-  service: "hotmail",
-  auth: {
-    user: "griendgamer@outlook.com", //
-    pass: "YourGamerFriend44", //
-  },
-});
+const { randomInt } = require("crypto");
 
 emailDetails = {
-  from: "", //where the email is from
+  from: "griend.gamer@zohomail.com", //where the email is from
   to: "", //where the email is to
   subject: "", //email subject
   text: "", //email
@@ -72,8 +54,6 @@ exports.register = async (req, res) => {
               }
             );
 
-            //res.status(200).json({message: "Account successully registered",token: token,});
-            emailDetails.from = sender;
             emailDetails.to = results.rows[0].email;
             emailDetails.text =
               "Welcome! " +
@@ -96,17 +76,13 @@ exports.register = async (req, res) => {
                 }); 
               }
             });
-
-            //initialize the array og games
-
+            
             db.query(
               "UPDATE gamers SET games = array_append(games, $1) where gametag = $2",
               [0, results.rows[0].gametag],
               (err, results) => {
                 if (err) {
                   console.log(err);
-                } else {
-                  console.log('game array initialized');
                 }
               }
             );
@@ -201,7 +177,6 @@ exports.forgotPassword = (req, res) => {
         .status(400)
         .json({ message: "No gamer registered with this email address" });
     } else {
-      emailDetails.from = sender;
       emailDetails.to = results.rows[0].email;
       emailDetails.text =
         "Good day " +
@@ -251,7 +226,7 @@ exports.updateImage = async (req, res) => {
           process.env.SECRET_KEY,
           {
             algorithm: "HS256",
-            expiresIn: 120000000,
+            expiresIn: '24h',
           }
         );
         res.status(200).json({
@@ -286,7 +261,7 @@ exports.updateGamer = async (req, res) => {
           process.env.SECRET_KEY,
           {
             algorithm: "HS256",
-            expiresIn: 120000000,
+            expiresIn: '24h',
           }
         );
         res.status(200).json({
@@ -298,67 +273,6 @@ exports.updateGamer = async (req, res) => {
   );
 };
 
-exports.ChatRequest = (req, res) => {
-  const roomId = req.params.roomId;
 
-  io.on("connection", (socket) => {
-    console.log("a user connected");
-    io.of("/").adapter.on("create-room", (roomId) => {
-      console.log(`room ${roomId} was created`);
-      socket.join(roomId);
 
-      socket.on("message", (message) => {
-        console.log(message);
-        io.to(roomId).emit("message", message);
-      });
-    });
 
-    socket.on("disconnect", () => {
-      console.log("a user disconnected!");
-    });
-  });
-};
-
-exports.addFriend = (req, res) => {
-  const gametag = req.params.gametag;
-  const friendTag = req.body.friendTag;
-
-  db.query(
-    "SELECT * FROM gamers WHERE gametag = $1",
-    [friendTag],
-    (err, results) => {
-      if (results.rows == 0) {
-        res.status(400).json({ message: "No user found" });
-      } else {
-        db.query(
-          "UPDATE gamers SET friends = array_append(friends, $1) where gametag = $2",
-          [friendTag, gametag],
-          (err, results) => {
-            if (err) {
-              console.log(err);
-              res.status(400).json({ message: "Query failed" });
-            } else {
-              io.on("connection", (socket) => {
-                console.log("a user connected");
-                io.on("create-room", (roomId) => {
-                  console.log(`room ${roomId} was created`);
-                  socket.join(roomId);
-
-                  socket.on("message", (message) => {
-                    console.log(message);
-                    io.to(roomId).emit("message", message);
-                  });
-                });
-
-                socket.on("disconnect", () => {
-                  console.log("a user disconnected!");
-                });
-              });
-              res.status(200).json({ message: "Friend Added" });
-            }
-          }
-        );
-      }
-    }
-  );
-};

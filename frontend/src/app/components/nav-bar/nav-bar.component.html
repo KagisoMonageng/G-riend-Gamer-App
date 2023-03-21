@@ -1,46 +1,21 @@
-<div class="navbar rounded-b-xl shadow-lg fixed top-0">
-  <div class="flex-1">
-    <a class="text-xl"><img class="w-28 h-auto mr-auto ml-auto py-0 logo" src="https://res.cloudinary.com/decomtmki/image/upload/v1670773041/G-riend_vdtc8q.png" alt=""></a>
-  </div>
 
-  <div class="flex-none">
-    <div class="dropdown dropdown-end">
-      <label tabindex="0" class="btn btn-ghost btn-circle" routerLink="/search">
-        <div class="indicator">
-            <i class="fi fi-rr-search icon text-white"></i>
-        </div>
-      </label>
-    </div>
-    <div class="dropdown dropdown-end">
-      <label tabindex="0" class="btn btn-ghost btn-circle avatar">
-        <div class="">
-            <i class="fi fi-rr-menu-dots-vertical icon text-white"></i>
-        </div>
-      </label>
-      <ul tabindex="0" class="menu menu-compact dropdown-content mt-4 p-2 shadow-lg h-fit bg-opacity-95 rounded-box w-52 z-50">
-        <li>
-          <a class="justify-end" routerLink="/home">
-            Home
-            <span><i class="fi fi-rr-home menu-icon"></i></span>
-          </a>
-        </li>
-
-        <li>
-            <a class="justify-end" routerLink="/profile">
-                Profile
-                <span><i class="fi fi-rr-user"></i></span>
-              </a>
-        </li>
-
-        <li (click)="signOut()">
-            <a class="justify-end" >
-                Sign Out
-                <span><i class="fi fi-rr-sign-out-alt"></i></span>
-              </a>
-        </li>
-
-
-      </ul>
-    </div>
-  </div>
+<div class="flex justify-center w-full">
+  <ul class="menu menu-horizontal fixed bottom-3 bg-primary bg-opacity-70 rounded-full backdrop-blur-sm px-4">
+    <li >
+      <a class="active:bg-gray-500 active:bg-opacity-10 text-white rounded-full" routerLink="/home">
+        <i class="fi fi-rr-house-blank"></i>
+      </a>
+    </li>
+    <li>
+      <a class="active:bg-gray-500 active:bg-opacity-10 text-white controller rounded-full"  routerLink="/search">
+        <img class="w-14" src="../../../assets/Controller.png" alt="">
+      </a>
+    </li>
+    <li>
+      <a class="active:bg-gray-500 active:bg-opacity-10 text-white rounded-full" routerLink="/profile">
+        <i class="fi fi-rr-user"></i>
+      </a>
+    </li>
+  </ul>
+  
 </div>

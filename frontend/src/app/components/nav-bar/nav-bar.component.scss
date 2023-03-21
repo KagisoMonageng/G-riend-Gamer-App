@@ -1,31 +1,10 @@
-.icon
-{
-    font-size: 24px;
-    align-items: center;
-    transition: 300ms;
-    &:hover
-    {
-        transform: scale(1.05);
-    }
-
-}
-.menu-icon
-{
-    align-items: center;
-}
-
-li a{
-    font-size: 18px;
-}
-li{
-    padding: .3rem 0 ;
-    transition: 300ms;
-
-    &:hover
-    {
-        transform: scale(1.05);
-    }
-}
 .menu{
-    background-color: rgba(63, 63, 63, 0.852);
+    background: linear-gradient(to right, #23252686, #4145459d); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    & .controller img
+    {
+        width: 34px;
+       
+
+    }
+    
 }
