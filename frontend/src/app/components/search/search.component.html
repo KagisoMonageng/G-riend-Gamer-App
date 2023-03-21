@@ -5,10 +5,10 @@
             <div class="search-input mx-auto text-center py-3 w-full h-1/6">
                 <input type="text" [(ngModel)]="term" (change)="textInput($event)" placeholder="Search a game"
                     class="input w-full rounded-full mx-auto text-center input-sm max-w-xs md:input-md md:max-w-xl input-box placeholder:text-center ">
-                <p class="text-sm my-3" *ngIf="term.length>0">Showing search results for : <span
+                <p class="text-sm mt-3 mb-1" *ngIf="term.length>0">Showing search results for : <span
                         class="font-semibold">{{term}}</span> </p>
 
-                <p class="text-sm text-center my-3" *ngIf="term.length==0"><span class="font-semibold">Featured
+                <p class="text-sm text-center mt-3 mb-1" *ngIf="term.length==0"><span class="font-semibold">Featured
                         Games</span> </p>
             </div>
 
