@@ -4,7 +4,7 @@ require("dotenv").config();
 const app = express();
 
 var corsOptions = {
-  origin:'*'
+  origin:'https://g-riend-gamer-app.vercel.app'
 }; 
 
 const account = require("./routes/account");
