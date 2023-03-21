@@ -9,6 +9,9 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { GamerService } from 'src/app/services/gamer/gamer.service';
 import { JwtService } from 'src/app/services/jwt/jwt.service';
 import { __values } from 'tslib';
+import { Location } from '@angular/common';
+import { NgxSpinnerService } from 'ngx-spinner';
+
 
 @Component({
   selector: 'app-view-game',
@@ -55,16 +58,23 @@ export class ViewGameComponent implements OnInit {
     private auth: AuthService,
     private gamer: GamerService,
     private router: Router,
+    private location: Location,
+    private spinner : NgxSpinnerService,
     private toast : NgToastService
   ) {}
 
   ngOnInit(): void {
+    this.spinner.show()
     this.gametag = sessionStorage.getItem('loggedIn_gamer');
     this.gamer.getOneGame(sessionStorage.getItem('selectedGame')).subscribe(
       (game: Game) => {
         this.game = game;
         console.log(this.game.game_id);
         this.getComments();
+        setTimeout(() => {
+          /* spinner ends after 2 seconds */
+          this.spinner.hide();
+        }, 500);
       },
       (err: HttpErrorResponse) => {
         console.log(err);
@@ -96,6 +106,9 @@ export class ViewGameComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+  back(){
+    this.location.back()
   }
 
   addComment(form: FormGroup) {

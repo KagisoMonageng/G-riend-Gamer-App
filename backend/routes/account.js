@@ -11,7 +11,6 @@ router.post("/login", gamer.login);
 
 //User Functions
 
-router.patch("/addFriend/:gametag", gamer.addFriend);
 
 router.get("/searchGamers/:gametag", gamer.searchGamers);
 
