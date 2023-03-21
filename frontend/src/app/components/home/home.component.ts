@@ -20,6 +20,8 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
 
+    
+    this.selectedGamersDetails = this.jwt.getData(sessionStorage.getItem('token')).name
     this.gamer.getMyFavs(sessionStorage.getItem('loggedIn_gamer')).subscribe((games :any)=>{
       this.games = games;
       console.log(games)

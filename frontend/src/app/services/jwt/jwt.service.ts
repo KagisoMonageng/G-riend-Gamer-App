@@ -11,7 +11,7 @@ export class JwtService {
 
   constructor() { }
   
-  getData(token: string)
+  getData(token: any)
   { 
     if(!this.helper.isTokenExpired(token)){
       return this.helper.decodeToken(token);
