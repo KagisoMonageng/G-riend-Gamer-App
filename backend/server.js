@@ -5,6 +5,7 @@ const app = express();
 
 var corsOptions = {
   origin:'https://g-riend-gamer-app.vercel.app'
+
 }; 
 
 const account = require("./routes/account");
@@ -13,7 +14,7 @@ const games = require("./routes/games");
 const port = 8080;
 
 app.use(express.json());
-app.use(cors(corsOptions));
+app.use(cors({origin:'https://g-riend-gamer-app.vercel.app',methods:['GET', 'POST','PUT','DELETE','PATCH'],credentials:true}));
 
 app.get('/',(req,res)=>{
   res.send('<div style="width: 100%; height:100vh; display:flex; flex-direction:column;gap:1rem ; justify-content:center; place-items:center;"> <div style="width:100px; height:100px; background-color: green; border-radius:50%"></div><h1 style="font-family:sans-serif;padding:0;margin:0;"> Server is running</h1> <p style="padding:0;margin:0;font-family:sans-serif;">Ready to take your requests</p></div>');
