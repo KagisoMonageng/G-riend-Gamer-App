@@ -30,7 +30,7 @@ export class AuthService {
 
   updateProfilePicture(gametag:any,image:any)
   {
-    return this.http.patch(this.url+'/updateProfileImage/'+gametag,image);
+    return this.http.patch(this.url+'/updateProfilePicture/'+gametag,image);
 
   }
 
