@@ -9,7 +9,8 @@ import { JwtService } from '../jwt/jwt.service';
 export class AuthService {
   isAuthenticated : boolean = false;
   token : string = '';
-  
+  // url = 'http://localhost:8080/account';
+
   url = 'https://g-riend-gamer-app-api.vercel.app/account';
 
   jwtHelper = new JwtHelperService();

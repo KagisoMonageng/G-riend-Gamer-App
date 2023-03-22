@@ -143,6 +143,7 @@ export class EditProfileComponent implements OnInit {
 
 
   onSubmit() {
+    console.log('first')
 
     this.spinner.show();
     const formData = new FormData();
@@ -158,6 +159,8 @@ export class EditProfileComponent implements OnInit {
 
         this.spinner.hide();
 
+      },(err:HttpErrorResponse)=>{
+        console.log(err)
       })
 
     })
