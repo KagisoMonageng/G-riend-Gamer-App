@@ -9,7 +9,8 @@ import { JwtService } from '../jwt/jwt.service';
 export class AuthService {
   isAuthenticated : boolean = false;
   token : string = '';
-  
+  // url = 'http://localhost:8080/account';
+
   url = 'https://g-riend-gamer-app-api.vercel.app/account';
 
   jwtHelper = new JwtHelperService();
@@ -30,13 +31,13 @@ export class AuthService {
 
   updateProfilePicture(gametag:any,image:any)
   {
-    return this.http.post(this.url+'/updateProfileImage/'+gametag,image);
+    return this.http.patch(this.url+'/updateProfilePicture/'+gametag,image);
 
   }
 
   updateProfile(gametag:any,data:any)
   {
-    return this.http.post(this.url+'/updateProfile/'+gametag,data);
+    return this.http.patch(this.url+'/update/'+gametag,data);
 
   }
 
