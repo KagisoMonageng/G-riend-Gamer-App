@@ -41,7 +41,7 @@ export class EditProfileComponent implements OnInit {
   }
   );
 
-  cloudinaryUrl: string = 'https://api.cloudinary.com/v1_1/decomtmki/image/upload';
+  cloudinaryUrl: string = 'https://api.cloudinary.com/v1_1/dkvrb3pye/image/upload';
   file: any;
   isUpdating: boolean = false;
 
@@ -147,7 +147,7 @@ export class EditProfileComponent implements OnInit {
     this.spinner.show();
     const formData = new FormData();
     formData.append("file", this.file)
-    formData.append("upload_preset", "owbmceht");
+    formData.append("upload_preset", "ylxn7mgj");
     this.http.post(this.cloudinaryUrl, formData).subscribe(async (res: any) => {
       this.image_link = await res.url;
       this.image.link = this.image_link;
