@@ -1,0 +1,35 @@
+<div class="h-full">
+      <div class="head  px-4 py-5 fixed  w-full flex justify-between mb-4">
+            <button (click)="back()" class="btn rounded-xl btn-secondary gap-1 text-white capitalize font-normal border-none ba bg-opacity-20 btn-xs"><i class="fi fi-rr-angle-left"></i>back</button>
+            <span></span>
+      </div>
+
+      <!-- <div (scroll)="onScroll($event)" class="flex flex-col overflow-y-scroll max-h-full snap-center snap-y scroll-smooth">
+        <section class="snap-start bg-black reveal">
+          <video #video src="https://res.cloudinary.com/decomtmki/video/upload/c_crop,g_north,h_1080,w_720,y_200/v1680125588/Motivational_video_-_This_will_change_your_mind_-_whatsapp_30_sec_video_-_g5wjfu.mp4" muted autoplay loop class="w-full"></video>
+
+        </section>
+        <section class="snap-start bg-black reveal">
+          <video #video src="https://res.cloudinary.com/decomtmki/video/upload/c_crop,g_north,h_1080,w_720,y_200/v1680125588/Motivational_video_-_This_will_change_your_mind_-_whatsapp_30_sec_video_-_g5wjfu.mp4" muted autoplay loop class="w-full"></video>
+
+        </section>
+        <section class="snap-start bg-black reveal">
+          <video #video src="https://res.cloudinary.com/decomtmki/video/upload/c_crop,g_north,h_1080,w_720,y_200/v1680125588/Motivational_video_-_This_will_change_your_mind_-_whatsapp_30_sec_video_-_g5wjfu.mp4" muted autoplay loop class="w-full"></video>
+
+        </section>
+        <section class="snap-start bg-black reveal">
+          <video #video src="https://res.cloudinary.com/decomtmki/video/upload/c_crop,g_north,h_1080,w_720,y_200/v1680125588/Motivational_video_-_This_will_change_your_mind_-_whatsapp_30_sec_video_-_g5wjfu.mp4" muted autoplay loop class="w-full"></video>
+        </section>
+
+      </div>
+
+
+ -->
+ <div *ngFor="let video of videos">
+  <video class="video" preload="metadata"  (click)="playVideo($event.target)" [src]="video.url"></video>
+</div>
+
+
+
+</div>
+

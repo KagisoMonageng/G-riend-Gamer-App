@@ -20,7 +20,6 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
 import { ViewProfileComponent } from './components/view-profile/view-profile.component';
 import { SearchComponent } from './components/search/search.component';
 import { ViewGameComponent } from './components/view-game/view-game.component';
-import { CommentsComponent } from './components/comments/comments.component';
 import { Ng2SearchPipe, Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
@@ -35,7 +34,6 @@ import { Ng2SearchPipe, Ng2SearchPipeModule } from 'ng2-search-filter';
     ViewProfileComponent,
     SearchComponent,
     ViewGameComponent,
-    CommentsComponent
   ],
   imports: [
     CommonModule,

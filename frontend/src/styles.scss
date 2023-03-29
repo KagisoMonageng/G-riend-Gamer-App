@@ -12,13 +12,12 @@
     margin: 0;
     scroll-behavior: smooth;
     padding: 0;
-  
+
     &::-webkit-scrollbar {
       display: none;
     }
   }
 body{
-    background-image: linear-gradient(transparent, #272727);
     height: 100vh;
     font-family: 'poppins';
     color: white;
