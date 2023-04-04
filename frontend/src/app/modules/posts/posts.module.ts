@@ -10,13 +10,16 @@ import { NgToastModule } from 'ng-angular-popup';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ViewPostComponent } from 'src/app/components/view-post/view-post.component';
+import { AddPostComponent } from 'src/app/components/add-post/add-post.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 
 @NgModule({
   declarations: [
     PostsComponent,
     UserPostsComponent,
-    ViewPostComponent
+    ViewPostComponent,
+    AddPostComponent
 
   ],
   imports: [
@@ -26,7 +29,8 @@ import { ViewPostComponent } from 'src/app/components/view-post/view-post.compon
     FormsModule,
     NgxSpinnerModule,
     NgToastModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    ImageCropperModule
   ]
 })
 export class PostsModule { }
