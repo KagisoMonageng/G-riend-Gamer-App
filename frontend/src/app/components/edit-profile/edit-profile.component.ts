@@ -65,7 +65,7 @@ export class EditProfileComponent implements OnInit {
 
       this.game_ids = data;
 
-      for (let index = 0; index < this.game_ids.length; index++) {
+      for (let index = 1; index < this.game_ids.length; index++) {
         this.gamerServ.getOneGame(this.game_ids[index]).subscribe((game: any) => {
           this.games.push(game);
         })

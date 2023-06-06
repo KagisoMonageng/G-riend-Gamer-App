@@ -14,20 +14,30 @@ import { JwtService } from 'src/app/services/jwt/jwt.service';
 export class SearchComponent implements OnInit {
 
   selectedGamersDetails: any;
-  games: any = [];
+  games: any[] = [];
   term:string = ''
+  featured : any[] = [];
 
-  constructor(private spinner : NgxSpinnerService,private jwt : JwtService,private auth : AuthService,private gamer : GamerService,private router:Router) {}
+  constructor(private spinner : NgxSpinnerService,private jwt : JwtService,private auth : AuthService,private gamer : GamerService,private router:Router) {
+
+  }
 
   ngOnInit(): void {
-    this.spinner.show();
 
-
+    this.selectedGamersDetails = this.jwt.getData(sessionStorage.getItem('key'))
+    //this.spinner.show();
     this.gamer.getGames().subscribe((games :any)=>{
       this.games = games;
+      for (let index = 0; index < 3; index++) {
+        let gameIndex = Math.floor(Math.random() * (this.games.length - 0 + 1)) + 0;
+        if(!this.featured.includes(gameIndex)){
+          this.featured.push(gameIndex);
+        }
+      }
+      //console.log(this.featured)
       setTimeout(() => {
         /* spinner ends after 2 seconds */
-        this.spinner.hide();
+        //this.spinner.hide();
       }, 500);
     },(err:HttpErrorResponse)=>{
 
@@ -45,6 +55,9 @@ export class SearchComponent implements OnInit {
   textInput(e :any){
 
   }
+
+  ready(){console.log('first')}
+
 
 
 

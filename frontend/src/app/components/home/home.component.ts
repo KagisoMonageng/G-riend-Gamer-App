@@ -19,9 +19,8 @@ export class HomeComponent implements OnInit {
   constructor(private jwt : JwtService,private auth : AuthService,private gamer : GamerService,private router:Router) {}
 
   ngOnInit(): void {
-
-    
-    this.selectedGamersDetails = this.jwt.getData(sessionStorage.getItem('token')).name
+    this.selectedGamersDetails = this.jwt.getData(sessionStorage.getItem('key'))
+    console.log(this.selectedGamersDetails)
     this.gamer.getMyFavs(sessionStorage.getItem('loggedIn_gamer')).subscribe((games :any)=>{
       this.games = games;
       console.log(games)

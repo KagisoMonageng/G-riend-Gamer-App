@@ -1,21 +1,39 @@
 <app-nav-bar></app-nav-bar>
 <div class="h-full">
     <div class="pt-2 px-2 h-full">
-        <div class="flex flex-col h-full">
-            <div class="search-input mx-auto text-center py-3 w-full h-1/6">
-                <input type="text" [(ngModel)]="term" (change)="textInput($event)" placeholder="Search a game"
-                    class="input w-full rounded-full mx-auto text-center input-sm max-w-xs md:input-md md:max-w-xl input-box placeholder:text-center ">
-                <p class="text-sm mt-3 mb-1" *ngIf="term.length>0">Showing search results for : <span
-                        class="font-semibold">{{term}}</span> </p>
+      <div class="header px-2 flex flex-col -space-y-2 mb-2">
+        <span>Hello</span>
+        <span class="font-bold text-4xl">{{selectedGamersDetails.name}}</span>
+    </div>
+      <p class="text-sm pl-2 mt-3 mb-1" *ngIf="term.length==0"><span class="font-semibold">Featured
+        Games</span></p>
 
-                <p class="text-sm text-center mt-3 mb-1" *ngIf="term.length==0"><span class="font-semibold">Featured
-                        Games</span> </p>
+      <div class="carousel carousel-center space-x-4 max-w-md h-40 p-2"  *ngIf="term.length==0">
+        <div class="carousel-item w-full h-full rounded-xl p-0 m-0" *ngFor="let feature of featured"  style="background-image: url({{games[feature].image}}); background-size: cover; background-repeat: no-repeat;">
+          <div class="flex space-x-3 p-4 w-full h-full backdrop-blur-2xl rounded-xl">
+            <img [src]="games[feature].image" alt="" class="w-28 h-28 object-cover rounded-xl">
+            <div class="flex flex-col place-items-start">
+              <p class="font-semibold text-lg">{{games[feature].full_name}}</p>
+              <p class="text-sm" >{{games[feature].publisher}}</p>
+              <p class="btn btn-xs gap-2 capitalize btn-primary text-white text-xs font-light"><i class="fi fi-rr-dice-d6"></i> {{games[feature].category}}</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+        <div class="flex flex-col h-full">
+            <div class="search-input mx-auto text-center py-4 w-full ">
+                <input type="text" [(ngModel)]="term" (change)="textInput($event)" placeholder="Search here..."
+                    class="input w-full input-primary rounded-full mx-auto text-center max-w-xs md:input-md md:max-w-xl input-box placeholder:text-center ">
+                <p class="text-sm mt-3 mb-1 font-thin" *ngIf="term.length>0">Showing search results for : <span
+                        class="font-semibold">{{term}}</span> </p>
             </div>
 
-            <div class="games-grid w-full grid grid-cols-4 gap-1 items-center content-start justify-around h-5/6 overflow-scroll">
+            <div class="games-grid w-full grid grid-cols-3 gap-2 items-center content-start justify-around h-5/6 pb-8 overflow-scroll">
                 <div *ngFor="let game of games | filter:term" (click)="setGameID(game.game_id)"
-                    class="flex flex-col text-center justify-center bg-secondary p-2 rounded-lg bg-opacity-20 cursor-pointer hover:bg-opacity-50 hover:shadow-md transition-all hover:scale-105 ">
-                    <img [src]="game.image" alt="" class="w-16 h-16 rounded-lg object-cover mx-auto">
+                    class="flex flex-col h-32  text-center justify-end bg-secondary py-1 rounded-lg bg-opacity-10 cursor-pointer active:bg-primary hover:shadow-md transition-all active:scale-95 " style=" background-repeat: no-repeat; background-position:center; background-size: cover; background-image:linear-gradient(to bottom, rgba(24, 24, 24, 0), rgb(0, 0, 0)),url({{game.image}})">
+                    <!-- <img [src]="game.image" alt="" class="w-16 h-16 rounded-lg object-cover mx-auto"> -->
+                    <span></span>
                     <p class="text-center text-xs mx-auto my-1 content-center items-center game-name">{{game.name}}</p>
                 </div>
             </div>
@@ -27,16 +45,5 @@
         <ngx-spinner bdColor="rgba(7, 6, 0 ,0.8)" size="default" color="#fff" type="square-loader" [fullScreen]="false">
             <p class="font-semibold -mt-7" style="color: white"> G- <span class="text-primary">riend </span> </p>
         </ngx-spinner>
-
-
-        <!-- <div *ngFor="let message of messageList">
-        <li>
-            {{message}}
-        </li>  
-        </div>
-
-        <input [(ngModel)]="newMessage" (keyup)="$event.keyCode == 13 && sendMessage()" />
-        <button (click)="sendMessage()">Send Message</button> -->
-
     </div>
 </div>

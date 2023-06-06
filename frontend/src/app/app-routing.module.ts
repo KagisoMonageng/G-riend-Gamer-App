@@ -19,9 +19,8 @@ const routes: Routes = [
   {path:'view-profile', component:ViewProfileComponent,canActivate: [GamerGuard]},
   {path:'search', component:SearchComponent},
   {path:'view-game', component:ViewGameComponent},
-
-
-
+  { path: 'posts', loadChildren: () => import('./modules/posts/posts.module').then(m => m.PostsModule) },
+  { path: 'create', loadChildren: () => import('./modules/games/games.module').then(m => m.GamesModule) },
 
 ];
 
