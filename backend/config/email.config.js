@@ -5,7 +5,7 @@ var transporter = nodemailer.createTransport({
     host: 'smtp.zoho.com', 
     auth: {
     user: "griend.gamer@zohomail.com", //
-    pass: "kEqRnW01Z6D3", //
+    pass: "MusicIsLife@44", //
   },
 });
 
