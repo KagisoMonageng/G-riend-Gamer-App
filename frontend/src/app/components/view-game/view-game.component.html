@@ -3,12 +3,14 @@
 </ngx-spinner>
 
 <div class="img" style="background-image: url({{game.image}}); background-size: cover;">
-  
+
     <div class="hero-overlay bg-opacity-10">
         <div class="head w-full flex justify-between px-4 pt-5">
-            <button (click)="back()" class="btn rounded-xl btn-secondary gap-1 text-white capitalize font-normal border-none ba bg-opacity-20 btn-xs"><i class="fi fi-rr-angle-left"></i>back</button>
+            <button (click)="back()"
+                class="btn rounded-xl btn-secondary gap-1 text-white capitalize font-normal border-none ba bg-opacity-20 btn-xs"><i
+                    class="fi fi-rr-angle-left"></i>back</button>
             <span></span>
-           </div> 
+        </div>
         <div class="hero-content  px-4 text-left flex-col">
 
             <h1 class="font-bold text-lg">{{game.full_name}}</h1>

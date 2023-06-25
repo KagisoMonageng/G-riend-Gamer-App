@@ -9,8 +9,8 @@ import { Game } from 'src/app/interfaces/game';
 })
 export class GamerService {
 
-  url = 'https://g-riend-gamer-app-api.vercel.app/';
-  //url = 'http://localhost:8080/';
+  // url = 'https://g-riend-gamer-app-api.vercel.app/';
+  url = 'http://localhost:8080/';
 
   constructor(private http:HttpClient) { }
 

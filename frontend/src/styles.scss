@@ -22,3 +22,11 @@ body{
     font-family: 'poppins';
     color: white;
 }
+
+.menu{
+  background: linear-gradient(to right, #23252686, #4145459d); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  & .controller img
+  {
+      width: 34px;
+  }
+}

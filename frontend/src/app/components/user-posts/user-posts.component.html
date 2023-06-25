@@ -1,35 +1,72 @@
-<div class="h-full">
-      <div class="head  px-4 py-5 fixed  w-full flex justify-between mb-4">
-            <button (click)="back()" class="btn rounded-xl btn-secondary gap-1 text-white capitalize font-normal border-none ba bg-opacity-20 btn-xs"><i class="fi fi-rr-angle-left"></i>back</button>
-            <span></span>
+<div class="head w-full flex justify-between px-4 py-5 transition-all duration-150 ease-in-out" id="back-button" #backButton>
+  <button (click)="back()"
+      class="btn rounded-xl btn-secondary gap-1 text-white capitalize font-normal border-none ba bg-opacity-20 btn-xs"><i
+          class="fi fi-rr-angle-left"></i>back</button>
+  <span></span>
+</div>
+<div class="user-posts flex gap-3 pb-20 flex-col scroll-smooth">
+
+  <div class="post h-2/5 w-full bg-white bg-opacity-5 rounded-lg  pb-3 relative" *ngFor="let post of userPosts">
+    <div class="w-full h-1/6 overlay absolute top-0 flex justify-between">
+      <div class="gamer-details flex gap-2 place-items-center p-4">
+        <img src="{{post.gamer_image}}" alt="" class="w-8 h-8 object-cover rounded-full">
+        <p class="font-semibold">{{post.gametag}}</p>
       </div>
+      <button class=" btn btn-ghost text-xs p-4"><i class="fi fi-rr-share"></i></button>
+    </div>
 
-      <!-- <div (scroll)="onScroll($event)" class="flex flex-col overflow-y-scroll max-h-full snap-center snap-y scroll-smooth">
-        <section class="snap-start bg-black reveal">
-          <video #video src="https://res.cloudinary.com/decomtmki/video/upload/c_crop,g_north,h_1080,w_720,y_200/v1680125588/Motivational_video_-_This_will_change_your_mind_-_whatsapp_30_sec_video_-_g5wjfu.mp4" muted autoplay loop class="w-full"></video>
+    <video controls class="rounded-t-lg mb-3 postVideo ">
+      <source src="https://res.cloudinary.com/decomtmki/video/upload/v1670772803/samples/sea-turtle.mp4">
+    </video>
 
-        </section>
-        <section class="snap-start bg-black reveal">
-          <video #video src="https://res.cloudinary.com/decomtmki/video/upload/c_crop,g_north,h_1080,w_720,y_200/v1680125588/Motivational_video_-_This_will_change_your_mind_-_whatsapp_30_sec_video_-_g5wjfu.mp4" muted autoplay loop class="w-full"></video>
+    <vg-player (onPlayerReady)="onPlayerReady($event)">
+      <vg-overlay-play></vg-overlay-play>
+      <vg-buffering></vg-buffering>
+  
+      <vg-controls>
+          <vg-play-pause></vg-play-pause>
+          <vg-playback-button></vg-playback-button>
+  
+          <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+  
+          <vg-scrub-bar>
+              <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+              <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+          </vg-scrub-bar>
+  
+          <vg-time-display vgProperty="left" vgFormat="mm:ss"></vg-time-display>
+          <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+  
+          <vg-track-selector></vg-track-selector>
+          <vg-mute></vg-mute>
+          <vg-volume></vg-volume>
+  
+          <vg-fullscreen></vg-fullscreen>
+      </vg-controls>
+  
+      <video [vgMedia]="media" #media id="singleVideo" preload="auto" crossorigin>
+          <source src="http://static.videogular.com/assets/videos/videogular.mp4" type="video/mp4">
+      </video>
+  </vg-player>
+  
 
-        </section>
-        <section class="snap-start bg-black reveal">
-          <video #video src="https://res.cloudinary.com/decomtmki/video/upload/c_crop,g_north,h_1080,w_720,y_200/v1680125588/Motivational_video_-_This_will_change_your_mind_-_whatsapp_30_sec_video_-_g5wjfu.mp4" muted autoplay loop class="w-full"></video>
 
-        </section>
-        <section class="snap-start bg-black reveal">
-          <video #video src="https://res.cloudinary.com/decomtmki/video/upload/c_crop,g_north,h_1080,w_720,y_200/v1680125588/Motivational_video_-_This_will_change_your_mind_-_whatsapp_30_sec_video_-_g5wjfu.mp4" muted autoplay loop class="w-full"></video>
-        </section>
-
-      </div>
+    <div class="content px-3 text-xs">
+      <p class="font-semibold text-primary">{{post.gametag}}</p>
+      <p>{{post.caption}}</p>
+      
+    </div>
 
 
- -->
- <div *ngFor="let video of videos">
-  <video class="video" preload="metadata"  (click)="playVideo($event.target)" [src]="video.url"></video>
+    
+
+  </div>
+
+
+
 </div>
 
 
 
-</div>
 
+<app-post-menu></app-post-menu>

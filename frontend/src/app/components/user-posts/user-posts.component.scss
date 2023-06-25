@@ -1,0 +1,34 @@
+.overlay{
+    background-image: linear-gradient(to right, #272727,transparent);
+}
+video{
+    width: 100%;
+    
+}
+video::-webkit-media-controls {
+    color: #ffffff;
+}
+
+video::-webkit-media-controls-play-button {
+  color: #ffffff;
+}
+
+video::-webkit-media-controls-panel {
+  background-image: none;
+}
+video::-webkit-media-controls-mute-button,
+video::-webkit-media-controls-timeline,
+video::-webkit-media-controls-current-time-display,
+video::-webkit-media-controls-time-remaining-display,
+video::-webkit-media-controls-volume-slider {
+  background-image: none !important;
+}
+
+video::-webkit-media-controls {
+    display: none !important;
+  }
+  
+  /* Display play button */
+  video::-webkit-media-controls-play-button {
+    display: block !important;
+  }

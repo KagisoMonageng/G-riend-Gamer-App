@@ -12,6 +12,12 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { ViewPostComponent } from 'src/app/components/view-post/view-post.component';
 import { AddPostComponent } from 'src/app/components/add-post/add-post.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { PostMenuComponent } from 'src/app/components/post-menu/post-menu.component';
+import { VgCoreModule } from '@videogular/ngx-videogular/core';
+import { VgControlsModule } from '@videogular/ngx-videogular/controls';
+import { VgOverlayPlayModule } from '@videogular/ngx-videogular/overlay-play';
+import { VgBufferingModule } from '@videogular/ngx-videogular/buffering';
+import {VgMediaDirective} from '@videogular/ngx-videogular/core';
 
 
 @NgModule({
@@ -19,7 +25,8 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     PostsComponent,
     UserPostsComponent,
     ViewPostComponent,
-    AddPostComponent
+    AddPostComponent,
+    PostMenuComponent
 
   ],
   imports: [
@@ -30,7 +37,12 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     NgxSpinnerModule,
     NgToastModule,
     Ng2SearchPipeModule,
-    ImageCropperModule
+    ImageCropperModule,
+    VgCoreModule,
+    VgControlsModule,
+    VgOverlayPlayModule,
+    VgBufferingModule
+
   ]
 })
 export class PostsModule { }

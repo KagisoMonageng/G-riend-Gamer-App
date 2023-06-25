@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit, SimpleChanges,HostListener, OnDestroy} from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges, HostListener, OnDestroy, ElementRef, ViewChild, AfterViewInit, QueryList, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -6,6 +6,11 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { GamerService } from 'src/app/services/gamer/gamer.service';
 import { JwtService } from 'src/app/services/jwt/jwt.service';
 import { Location } from '@angular/common';
+import { PostsService } from 'src/app/services/posts/posts.service';
+import { UserPost } from 'src/app/interfaces/posts';
+import { HttpErrorResponse } from '@angular/common/http';
+import { VgApiService } from '@videogular/ngx-videogular/core';
+
 
 
 @Component({
@@ -13,75 +18,50 @@ import { Location } from '@angular/common';
   templateUrl: './user-posts.component.html',
   styleUrls: ['./user-posts.component.scss']
 })
-export class UserPostsComponent implements OnInit,OnDestroy {
+export class UserPostsComponent implements OnInit, AfterViewInit {
+  preload: string = 'auto';
+  api: VgApiService;
 
-  @HostListener('window:scroll', ['$event'])
-  onScroll(event) {
+  userPosts: UserPost[] = [];
+  @ViewChild('backButton', { static: true }) myElementRef: ElementRef;
 
-    this.reveal()
+
+
+  constructor(private location: Location, private toast: NgToastService, private spinner: NgxSpinnerService, private router: Router,
+    private postServ: PostsService) { }
+
+  onPlayerReady(api: VgApiService) {
+    this.api = api;
+    this.api.getDefaultMedia().subscriptions.ended.subscribe(
+      () => {
+        // Set the video to the beginning
+        this.api.getDefaultMedia().currentTime = 0;
+      }
+    );
   }
-
-  videos = [
-    { url: 'https://res.cloudinary.com/decomtmki/video/upload/c_crop,g_north,h_1080,w_720,y_200/v1680125588/Motivational_video_-_This_will_change_your_mind_-_whatsapp_30_sec_video_-_g5wjfu.mp4', thumbnail: 'https://example.com/video1-thumbnail.jpg' },
-    { url: 'https://res.cloudinary.com/decomtmki/video/upload/c_crop,g_north,h_1080,w_720,y_200/v1680125588/Motivational_video_-_This_will_change_your_mind_-_whatsapp_30_sec_video_-_g5wjfu.mp4', thumbnail: 'https://example.com/video2-thumbnail.jpg' },
-    { url: 'https://res.cloudinary.com/decomtmki/video/upload/c_crop,g_north,h_1080,w_720,y_200/v1680125588/Motivational_video_-_This_will_change_your_mind_-_whatsapp_30_sec_video_-_g5wjfu.mp4', thumbnail: 'https://example.com/video3-thumbnail.jpg' },
-    // Add more videos here
-  ];
-
-  private observer: IntersectionObserver;
-
-  constructor(private auth : AuthService,private location : Location,private gamerServ: GamerService, private account: AuthService, private toast: NgToastService, private jwt: JwtService, private spinner: NgxSpinnerService,  private router: Router) { }
-
   ngOnInit(): void {
-    this.observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const video = entry.target as HTMLVideoElement;
-          video.src = video.dataset['src'];
-          video.play();
-        }
-      });
-    }, { threshold: 0.5 });
-
-    document.querySelectorAll('.video').forEach(video => {
-      this.observer.observe(video);
-    });
-
-  }
-
-  ngOnDestroy() {
-    this.observer.disconnect();
-  }
-
-  playVideo(video: HTMLVideoElement|any) {
-    if (video.paused) {
-      video.play();
-    } else {
-      video.pause();
-    }
+    this.postServ.getPosts().subscribe((posts: UserPost[]) => {
+      console.log(posts)
+      this.userPosts = posts;
+    }, (err: HttpErrorResponse) => {
+      console.log(err)
+      this.toast.error({ detail: "Failed to get posts", summary: err.error.message })
+    })
   }
 
 
+
+  ngAfterViewInit(): void {
+
+
+  }
 
 
   back() {
     this.location.back()
   }
 
-  reveal(){
-    let reveals = document.querySelectorAll('.reveal');
-    for (let index = 0; index < reveals.length; index++) {
-      var windowHeight = window.innerHeight;
-      var elementTop = reveals[index].getBoundingClientRect().top;
-      var elementVisible = 150;
 
-      if (elementTop < windowHeight - elementVisible) {
-        reveals[index].classList.add("active");
-      } else {
-        reveals[index].classList.remove("active");
-      }
-    }
-  }
 
 
 }

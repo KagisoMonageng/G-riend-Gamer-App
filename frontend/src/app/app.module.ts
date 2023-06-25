@@ -34,6 +34,7 @@ import { Ng2SearchPipe, Ng2SearchPipeModule } from 'ng2-search-filter';
     ViewProfileComponent,
     SearchComponent,
     ViewGameComponent,
+  
   ],
   imports: [
     CommonModule,

@@ -30,7 +30,6 @@ export class HomeComponent implements OnInit {
 
   }
 
-
   setGameID(game_id:any)
   {
     sessionStorage.setItem('selectedGame',game_id)
