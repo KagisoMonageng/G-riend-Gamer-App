@@ -13,11 +13,7 @@ import { ViewPostComponent } from 'src/app/components/view-post/view-post.compon
 import { AddPostComponent } from 'src/app/components/add-post/add-post.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { PostMenuComponent } from 'src/app/components/post-menu/post-menu.component';
-import { VgCoreModule } from '@videogular/ngx-videogular/core';
-import { VgControlsModule } from '@videogular/ngx-videogular/controls';
-import { VgOverlayPlayModule } from '@videogular/ngx-videogular/overlay-play';
-import { VgBufferingModule } from '@videogular/ngx-videogular/buffering';
-import {VgMediaDirective} from '@videogular/ngx-videogular/core';
+
 
 
 @NgModule({
@@ -38,11 +34,7 @@ import {VgMediaDirective} from '@videogular/ngx-videogular/core';
     NgToastModule,
     Ng2SearchPipeModule,
     ImageCropperModule,
-    VgCoreModule,
-    VgControlsModule,
-    VgOverlayPlayModule,
-    VgBufferingModule
-
+  
   ]
 })
 export class PostsModule { }

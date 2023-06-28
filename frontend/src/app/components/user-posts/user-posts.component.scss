@@ -1,5 +1,5 @@
 .overlay{
-    background-image: linear-gradient(to right, #272727,transparent);
+    background-image: linear-gradient(to bottom, #272727a1,transparent);
 }
 video{
     width: 100%;
@@ -10,25 +10,26 @@ video::-webkit-media-controls {
 }
 
 video::-webkit-media-controls-play-button {
-  color: #ffffff;
+  
 }
 
 video::-webkit-media-controls-panel {
   background-image: none;
 }
-video::-webkit-media-controls-mute-button,
+
 video::-webkit-media-controls-timeline,
 video::-webkit-media-controls-current-time-display,
 video::-webkit-media-controls-time-remaining-display,
 video::-webkit-media-controls-volume-slider {
   background-image: none !important;
+  display: none !important;
 }
 
-video::-webkit-media-controls {
-    display: none !important;
-  }
+
   
   /* Display play button */
   video::-webkit-media-controls-play-button {
     display: block !important;
+    background-color: rgba(57, 57, 57, 0.336);
+    border-radius: 100%;
   }

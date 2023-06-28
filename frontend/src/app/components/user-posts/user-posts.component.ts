@@ -9,7 +9,7 @@ import { Location } from '@angular/common';
 import { PostsService } from 'src/app/services/posts/posts.service';
 import { UserPost } from 'src/app/interfaces/posts';
 import { HttpErrorResponse } from '@angular/common/http';
-import { VgApiService } from '@videogular/ngx-videogular/core';
+
 
 
 
@@ -20,7 +20,7 @@ import { VgApiService } from '@videogular/ngx-videogular/core';
 })
 export class UserPostsComponent implements OnInit, AfterViewInit {
   preload: string = 'auto';
-  api: VgApiService;
+
 
   userPosts: UserPost[] = [];
   @ViewChild('backButton', { static: true }) myElementRef: ElementRef;
@@ -30,15 +30,7 @@ export class UserPostsComponent implements OnInit, AfterViewInit {
   constructor(private location: Location, private toast: NgToastService, private spinner: NgxSpinnerService, private router: Router,
     private postServ: PostsService) { }
 
-  onPlayerReady(api: VgApiService) {
-    this.api = api;
-    this.api.getDefaultMedia().subscriptions.ended.subscribe(
-      () => {
-        // Set the video to the beginning
-        this.api.getDefaultMedia().currentTime = 0;
-      }
-    );
-  }
+  
   ngOnInit(): void {
     this.postServ.getPosts().subscribe((posts: UserPost[]) => {
       console.log(posts)
