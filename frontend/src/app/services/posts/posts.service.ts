@@ -8,8 +8,8 @@ import { UserPost } from 'src/app/interfaces/posts';
 })
 export class PostsService {
 
-  // url = 'https://g-riend-gamer-app-api.vercel.app/posts/';
-  url = 'http://localhost:8080/posts/';
+  url = 'https://g-riend-gamer-app-api.vercel.app/posts/';
+  //url = 'http://localhost:8080/posts/';
 
   constructor(private http: HttpClient) { }
 
