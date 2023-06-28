@@ -12,7 +12,7 @@
 
 
 </div>
-<div class="user-posts flex gap-3 pb-20 px-2 flex-col scroll-smooth">
+<div class="user-posts flex gap-3 pb-20 px-2 flex-col scroll-smooth w-full">
 
   <div class="post h-2/5 w-full bg-white bg-opacity-5 rounded-lg pb-3 relative shadow" *ngFor="let post of userPosts">
     <div class="w-full h-1/6 overlay absolute top-0 flex justify-between">
@@ -23,7 +23,7 @@
       <button class=" btn btn-ghost text-xs p-4"><i class="fi fi-rr-share"></i></button>
     </div>
 
-    <video controls class="rounded-t-lg mb-3 postVideo " preload="auto" loop>
+    <video controls class="rounded-t-lg mb-3 postVideo w-full" preload="auto" loop>
       <source src="{{post.media}}">
     </video>
 
